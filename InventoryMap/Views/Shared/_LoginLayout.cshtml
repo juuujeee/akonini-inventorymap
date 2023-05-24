@@ -1,0 +1,73 @@
+﻿@{
+    var baseUrl = Url.Content("~/");
+
+}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Akonini | Inventory Map</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:image" content="https://realestatebroker.akonini.com/css/icon/akonini-logo.png" />
+    <link rel="shortcut icon" type="image/jpg" href="~/icon/favicon.png" />
+    <environment include="Development">
+
+        <link rel="stylesheet" href="~/css/login.css" />
+        <link rel="stylesheet" href="~/css/common.css" />
+
+
+    </environment>
+    <environment exclude="Development">
+
+        <link rel="stylesheet" href="~/css/login.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/css/common.css" asp-append-version="true" />
+
+
+    </environment>
+
+</head>
+<body>
+    <header>
+        <a href="@Url.Content("~/")" class="company-logo-container">
+            <i class="akonini-logo-icon">
+                <img src="~/images/akonini-logo.png" class="akonini-logo-img" />
+            </i>
+            <p class="akonini-logo-text">akonini</p>
+        </a>
+    </header>
+
+
+    @Html.AntiForgeryToken()
+    <content>
+        @RenderBody()
+    </content>
+
+    <footer>
+    </footer>
+
+    <script>
+        var AppGlobal = {
+            baseUrl: "@baseUrl",
+            usernameID: 0,
+            filePath: 'https://akonini-files.azurewebsites.net/File/'
+        };
+    </script>
+
+    <environment include="Development">
+
+        <script src="~/scripts/script_common.js"></script>
+        <script src="~/scripts/script_login.js"></script>
+
+    </environment>
+    <environment exclude="Development">
+
+        <script src="~/scripts/script_common.js" asp-append-version="true"></script>
+        <script src="~/scripts/script_login.js" asp-append-version="true"></script>
+
+    </environment>
+
+    @RenderSection("Scripts", required: false)
+
+</body>
+</html>

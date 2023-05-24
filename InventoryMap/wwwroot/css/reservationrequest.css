@@ -1,0 +1,264 @@
+﻿
+﻿
+
+.reserve-form-group {
+    display: flex;
+}
+
+
+.new-reservation-modal {
+    overflow-y: scroll;
+    padding: 10px;
+    height: 100%;
+    border-radius: 10px;
+}
+
+.reservation-form {
+    background-color: #dcdfe4;
+    padding: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    height: auto;
+}
+
+
+.reservationRequest-recordHeader {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.reservation-request-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    overflow-y: scroll;
+    height: 100%;
+    padding-top: 0;
+}
+
+.packageRequest-tblBody {
+    height: 100%;
+    overflow-y: scroll;
+    background: #dcdfe4;
+}
+
+.agentListing-recorBody {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.recordHeader-projectFilter {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    grid-column-gap: 10px;
+    margin-bottom: 10px;
+}
+
+    .recordHeader-projectFilter label {
+        display: flex;
+        align-self: center;
+        font-size: 18px;
+    }
+
+    .recordHeader-projectFilter .hasDropdown {
+        border: 1px solid #d5d5d5;
+        position: relative;
+        display: grid;
+        grid-template-columns: 1fr 25px;
+        background: #e7e7e7;
+    }
+
+        .recordHeader-projectFilter .hasDropdown input {
+            background: none;
+            border: none;
+            padding: 7px;
+            width: 100%;
+            transition: all .5s ease;
+            font-size: 15px;
+        }
+
+        .recordHeader-projectFilter .hasDropdown i {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+.packageRequest-tblHeader {
+    display: grid;
+    grid-template-columns: 40px repeat(4,minmax(150px,1fr)) 110px 110px;
+    height: 45px;
+    width: 100%;
+    box-sizing: border-box;
+    border-bottom: 1px solid #999;
+    color: white;
+    background: #444;
+    text-align: center;
+    grid-column-gap: 15px;
+}
+
+    .packageRequest-tblHeader h4 {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box;
+        font-size: 17px;
+    }
+
+.packageRequest-tblBodyItem {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    white-space: normal;
+    grid-column-gap: 15px;
+    margin: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+    .packageRequest-tblBodyItem .reservation-request-info {
+        display: flex;
+        justify-content: left;
+        align-items: center;
+        font-size: 15px;
+        margin-bottom: 5px;
+    }
+
+.reservationRequest-recordHeader h2 {
+    font-size: 21px;
+}
+
+.request-status {
+    width: 100%;
+    display: inline-block !important;
+    grid-template-columns: 1fr;
+    justify-content: center;
+    font-size: 13px;
+    text-align: right;
+    margin: 5px 0;
+}
+
+    .request-status div {
+        display: inline;
+        background-color: #d9d9d9;
+        border: none;
+        border-radius: 10px;
+        padding: 5px;
+        font-size: 12px;
+    }
+
+
+.reservation-request-subInfo {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 5px;
+    margin-bottom: 5px;
+}
+
+    .reservation-request-subInfo .developer-name {
+        border-right: 1px solid #999;
+    }
+
+    .reservation-request-subInfo span {
+        font-size: 14px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .reservation-request-subInfo small {
+        display: block;
+        text-align: center;
+        font-size: 12px;
+        color: #999;
+    }
+
+    .reservation-request-subInfo div {
+        line-height: 15px;
+    }
+
+
+
+
+
+
+/***new reservation request**/
+.reserve-form-group {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+    .reserve-form-group label {
+        font-size: 14px;
+        margin-bottom: 3px;
+    }
+
+    .reserve-form-group input {
+        border: none;
+        padding: 7px;
+        width: 100%;
+        transition: all .5s ease;
+        font-size: 15px;
+        outline: none;
+    }
+
+    .reserve-form-group .hasDropdown {
+        display: grid;
+        grid-template-columns: 1fr 30px;
+        background: #FFF;
+    }
+
+        .reserve-form-group .hasDropdown i {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            padding: 0 5px;
+        }
+
+        .reserve-form-group .hasDropdown svg {
+            height: 20px;
+        }
+
+.reserve-btn-container button {
+    width: 100%;
+    padding: 10px 0;
+    background: #FFB606;
+    border: none;
+    font-weight: 600;
+}
+
+.reserve-form-imgWrapper {
+    height: 100px;
+    background: #FFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+    .reserve-form-imgWrapper img[src=''] {
+        display: none;
+    }
+
+    .reserve-form-imgWrapper p {
+        font-size: 14px;
+    }
+
+
+/*
+.float-right-btn {
+    position: fixed;
+    width: auto;
+    background: #FFB606;
+    padding: 10px;
+    right: 10px;
+    bottom: 70px;
+    z-index: 9999;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+}
+*/

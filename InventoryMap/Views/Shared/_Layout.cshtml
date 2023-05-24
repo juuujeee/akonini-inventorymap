@@ -1,0 +1,227 @@
+﻿@using Microsoft.AspNetCore.Http.Extensions
+
+@{
+    
+    var baseUrl = Url.Content("~/");
+
+
+    int? masterPersonIDSession = ViewContext.HttpContext.Session.GetInt32("MasterPersonID");
+    var firstNameSession = ViewContext.HttpContext.Session.GetString("FirstName");
+    var lastNameSession = ViewContext.HttpContext.Session.GetString("LastName");
+
+
+    var loginLink = baseUrl + $"user/login/";
+    var logoutLink = baseUrl + "user/logout";
+
+    var fullName = $"{firstNameSession} {lastNameSession}";
+    var nameInitial = $"{firstNameSession?.Substring(0, 1).ToUpper()} {lastNameSession?.Substring(0, 1).ToUpper()}";
+
+}
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Akonini | Inventory Map</title>
+    <link rel="shortcut icon" type="image/jpg" href="~/icon/favicon.png" />
+    <environment include="Development">
+        <link rel="stylesheet" href="~/css/layout.css" />
+        <link rel="stylesheet" href="~/css/home.css" />
+        <link rel="stylesheet" href="~/css/project.css" />
+        <link rel="stylesheet" href="~/css/projectdetails.css" />
+        <link rel="stylesheet" href="~/css/common.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="~/css/layout.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/css/home.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/css/project.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/css/projectdetails.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/css/common.css" asp-append-version="true" />
+    </environment>
+    @RenderSection("Styles", required: false)
+
+    <link rel='manifest' href='/manifest.json'>
+    <script>
+
+    </script>
+
+</head>
+<body>
+
+    <header class="first-page-header">
+        <div class="main-header">
+            <div class="menu-wrapper">
+                <i class="header-menu-icon jsLeftMenuBtn">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" height="25px"><path fill="#111" d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z" /></svg>
+                </i>
+
+            </div>
+            <a href="@Url.Content("~/")" class="company-logo-container">
+                <i class="akonini-logo-icon">
+                    <img src="~/images/akonini-logo.png" class="akonini-logo-img" />
+                </i>
+                <p class="akonini-logo-text">akonini</p>
+            </a>
+            <i class="header-notification-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" height="25px"><path fill="#111" d="M224 0c-17.7 0-32 14.3-32 32V49.9C119.5 61.4 64 124.2 64 200v33.4c0 45.4-15.5 89.5-43.8 124.9L5.3 377c-5.8 7.2-6.9 17.1-2.9 25.4S14.8 416 24 416H424c9.2 0 17.6-5.3 21.6-13.6s2.9-18.2-2.9-25.4l-14.9-18.6C399.5 322.9 384 278.8 384 233.4V200c0-75.8-55.5-138.6-128-150.1V32c0-17.7-14.3-32-32-32zm0 96h8c57.4 0 104 46.6 104 104v33.4c0 47.9 13.9 94.6 39.7 134.6H72.3C98.1 328 112 281.3 112 233.4V200c0-57.4 46.6-104 104-104h8zm64 352H224 160c0 17 6.7 33.3 18.7 45.3s28.3 18.7 45.3 18.7s33.3-6.7 45.3-18.7s18.7-28.3 18.7-45.3z" /></svg>
+            </i>
+        </div>
+    </header>
+
+
+    @Html.AntiForgeryToken()
+    <div class="content-wrapper jsContentWrapper custom-scrollbar">
+        @RenderBody()
+    </div>
+
+    <footer>
+    </footer>
+
+
+    <!--BOTTOM MENU-->
+    <nav>
+        <div class="nav-icon-container">
+            <i class="nav-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24"><path d="M23.121,9.069,15.536,1.483a5.008,5.008,0,0,0-7.072,0L.879,9.069A2.978,2.978,0,0,0,0,11.19v9.817a3,3,0,0,0,3,3H21a3,3,0,0,0,3-3V11.19A2.978,2.978,0,0,0,23.121,9.069ZM15,22.007H9V18.073a3,3,0,0,1,6,0Zm7-1a1,1,0,0,1-1,1H17V18.073a5,5,0,0,0-10,0v3.934H3a1,1,0,0,1-1-1V11.19a1.008,1.008,0,0,1,.293-.707L9.878,2.9a3.008,3.008,0,0,1,4.244,0l7.585,7.586A1.008,1.008,0,0,1,22,11.19Z" /></svg>
+            </i>
+            <a href="@string.Concat(baseUrl, "home")" class="nav-icon-text">Home</a>
+        </div>
+        <div class="nav-icon-container disabled-nav jsComingSoon">
+            <i class="nav-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24"><path d="M6.892,17.153l-.864-.864,2.121-2.122,.864,.864c1.369,1.368,3.597,1.369,4.966,0l6.005-6.004c1.369-1.369,1.369-3.597,0-4.966-1.195-1.195-3.042-1.378-4.403-.489-.974-.38-2.022-.58-3.1-.58h-.002c-.233,0-.465,.01-.694,.028l1.112-1.112C14.167,.638,15.834,.003,17.502,.003c1.667,0,3.237,.577,4.684,2.025,2.454,2.545,2.43,6.61-.08,9.12l-6.005,6.004c-1.27,1.27-2.937,1.904-4.604,1.904s-3.335-.635-4.604-1.904ZM1.826,21.975c1.529,1.529,3.019,2.026,4.686,2.025,1.667,0,3.334-.635,4.602-1.904l1.112-1.112c-.23,.018-.461,.028-.694,.028h-.002c-1.078,0-2.126-.199-3.1-.58-1.36,.889-3.208,.705-4.403-.49-1.369-1.369-1.369-3.597,0-4.966l6.005-6.004c1.369-1.369,3.597-1.369,4.966,0l.864,.864,2.121-2.122-.864-.864c-2.538-2.538-6.669-2.539-9.208,0L1.906,12.855c-2.51,2.51-2.534,6.575-.08,9.12Z"></path></svg>
+            </i>
+            <a href="@string.Concat(baseUrl, "referral-links")" class="nav-icon-text data-link">Referral</a>
+        </div>
+        <div class="nav-icon-container disabled-nav jsComingSoon">
+            <i class="nav-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M0 96C0 60.7 28.7 32 64 32H196.1c19.1 0 37.4 7.6 50.9 21.1L289.9 96H448c35.3 0 64 28.7 64 64V416c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V96zM64 80c-8.8 0-16 7.2-16 16V416c0 8.8 7.2 16 16 16H448c8.8 0 16-7.2 16-16V160c0-8.8-7.2-16-16-16H286.6c-10.6 0-20.8-4.2-28.3-11.7L213.1 87c-4.5-4.5-10.6-7-17-7H64z" /></svg>
+            </i>
+            <a href="@string.Concat(baseUrl, "chats")" class="nav-icon-text data-link">Chat</a>
+        </div>
+        <div class="nav-icon-container disabled-nav jsComingSoon">
+            <i class="nav-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M244 84L255.1 96L267.1 84.02C300.6 51.37 347 36.51 392.6 44.1C461.5 55.58 512 115.2 512 185.1V190.9C512 232.4 494.8 272.1 464.4 300.4L283.7 469.1C276.2 476.1 266.3 480 256 480C245.7 480 235.8 476.1 228.3 469.1L47.59 300.4C17.23 272.1 0 232.4 0 190.9V185.1C0 115.2 50.52 55.58 119.4 44.1C164.1 36.51 211.4 51.37 244 84C243.1 84 244 84.01 244 84L244 84zM255.1 163.9L210.1 117.1C188.4 96.28 157.6 86.4 127.3 91.44C81.55 99.07 48 138.7 48 185.1V190.9C48 219.1 59.71 246.1 80.34 265.3L256 429.3L431.7 265.3C452.3 246.1 464 219.1 464 190.9V185.1C464 138.7 430.4 99.07 384.7 91.44C354.4 86.4 323.6 96.28 301.9 117.1L255.1 163.9z" /></svg>
+            </i>
+            <span class="nav-icon-text">Favorites</span>
+        </div>
+        <div class="nav-icon-container disabled-nav jsComingSoon">
+            <i class="nav-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g id="_01_align_center" data-name="01 align center"><path d="M21,24H19V18.957A2.96,2.96,0,0,0,16.043,16H7.957A2.96,2.96,0,0,0,5,18.957V24H3V18.957A4.963,4.963,0,0,1,7.957,14h8.086A4.963,4.963,0,0,1,21,18.957Z" /><path d="M12,12a6,6,0,1,1,6-6A6.006,6.006,0,0,1,12,12ZM12,2a4,4,0,1,0,4,4A4,4,0,0,0,12,2Z" /></g></svg>
+            </i>
+            <a href="@String.Concat(baseUrl, "profile")" class="nav-icon-text data-link">Profile</a>
+        </div>
+    </nav>
+
+
+    <!--LEFT MENU-->
+    <div class="left-menu-container hidden jsLeftMenuContainer">
+        <div class="left-menu-body">
+            <div class="left-menu-body-firstRow">
+                <div class="jsLeftMenuIcon left-menu-closeIcon-container">
+                    <i class="left-menu-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" style="height: 20px;"><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z" /></svg>
+                    </i>
+                </div>
+                <div class="left-menu-body-firstRow-companyLogo">
+                    <i class="akonini-logo-icon">
+                        <img src="~/images/akonini-logo.png" class="akonini-logo-img" />
+                    </i>
+                    <p class="akonini-logo-text">akonini</p>
+                </div>
+                <div class="left-menu-body-firstRow-userDetails">
+                    <i class="user-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M399 384.2C376.9 345.8 335.4 320 288 320H224c-47.4 0-88.9 25.8-111 64.2c35.2 39.2 86.2 63.8 143 63.8s107.8-24.7 143-63.8zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm256 16a72 72 0 1 0 0-144 72 72 0 1 0 0 144z" /></svg>
+                    </i>
+                    <div class="user-details-login">
+                        <h3>@fullName</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="left-menu-body-secondRow">
+                <ul class="left-menu-body-secondRow-ul">
+                    <li class="left-menu-body-secondRow-li">
+                        <i class="left-menu-body-secondRow-i">
+                            <svg xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24"><path d="M23.121,9.069,15.536,1.483a5.008,5.008,0,0,0-7.072,0L.879,9.069A2.978,2.978,0,0,0,0,11.19v9.817a3,3,0,0,0,3,3H21a3,3,0,0,0,3-3V11.19A2.978,2.978,0,0,0,23.121,9.069ZM15,22.007H9V18.073a3,3,0,0,1,6,0Zm7-1a1,1,0,0,1-1,1H17V18.073a5,5,0,0,0-10,0v3.934H3a1,1,0,0,1-1-1V11.19a1.008,1.008,0,0,1,.293-.707L9.878,2.9a3.008,3.008,0,0,1,4.244,0l7.585,7.586A1.008,1.008,0,0,1,22,11.19Z" /></svg>
+                        </i>
+                        <span class="left-menu-body-secondRow-li-span">Home</span>
+                    </li>
+                    <li class="left-menu-body-secondRow-li disabled-nav jsComingSoon">
+                        <i class="left-menu-body-secondRow-i">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M0 96C0 60.7 28.7 32 64 32H196.1c19.1 0 37.4 7.6 50.9 21.1L289.9 96H448c35.3 0 64 28.7 64 64V416c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V96zM64 80c-8.8 0-16 7.2-16 16V416c0 8.8 7.2 16 16 16H448c8.8 0 16-7.2 16-16V160c0-8.8-7.2-16-16-16H286.6c-10.6 0-20.8-4.2-28.3-11.7L213.1 87c-4.5-4.5-10.6-7-17-7H64z" /></svg>
+                        </i>
+                        <a href="@string.Concat(baseUrl, "projects")" class="left-menu-body-secondRow-li-span data-link">Development</a>
+                    </li>
+                    <li class="left-menu-body-secondRow-li jsLogoutBtn">
+                        <i class="left-menu-body-secondRow-i">
+                            <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24"><path d="M22.763,10.232l-4.95-4.95L16.4,6.7,20.7,11H6.617v2H20.7l-4.3,4.3,1.414,1.414,4.95-4.95a2.5,2.5,0,0,0,0-3.536Z" /><path d="M10.476,21a1,1,0,0,1-1,1H3a1,1,0,0,1-1-1V3A1,1,0,0,1,3,2H9.476a1,1,0,0,1,1,1V8.333h2V3a3,3,0,0,0-3-3H3A3,3,0,0,0,0,3V21a3,3,0,0,0,3,3H9.476a3,3,0,0,0,3-3V15.667h-2Z" /></svg>
+                        </i>
+                        <a href="@logoutLink" class="left-menu-body-secondRow-li-span">Logout</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="left-menu-body-thirdRow">
+                <h3 class="left-menu-body-thirdRow-title-h3"><span>APP CONTROLS</span></h3>
+
+                <ul class="left-menu-body-secondRow-ul">
+                    <li class="left-menu-body-secondRow-li">
+                        <i class="left-menu-body-secondRow-i">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M164.9 24.6c-7.7-18.6-28-28.5-47.4-23.2l-88 24C12.1 30.2 0 46 0 64C0 311.4 200.6 512 448 512c18 0 33.8-12.1 38.6-29.5l24-88c5.3-19.4-4.6-39.7-23.2-47.4l-96-40c-16.3-6.8-35.2-2.1-46.3 11.6L304.7 368C234.3 334.7 177.3 277.7 144 207.3L193.3 167c13.7-11.2 18.4-30 11.6-46.3l-40-96z" /></svg>
+                        </i>
+                        <span class="left-menu-body-secondRow-li-span">Contact Us</span>
+                    </li>
+                    <li class="left-menu-body-secondRow-li">
+                        <i class="left-menu-body-secondRow-i">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M64 464c-8.8 0-16-7.2-16-16V64c0-8.8 7.2-16 16-16H224v80c0 17.7 14.3 32 32 32h80V448c0 8.8-7.2 16-16 16H64zM64 0C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V154.5c0-17-6.7-33.3-18.7-45.3L274.7 18.7C262.7 6.7 246.5 0 229.5 0H64zm56 256c-13.3 0-24 10.7-24 24s10.7 24 24 24H264c13.3 0 24-10.7 24-24s-10.7-24-24-24H120zm0 96c-13.3 0-24 10.7-24 24s10.7 24 24 24H264c13.3 0 24-10.7 24-24s-10.7-24-24-24H120z" /></svg>
+                        </i>
+                        <span class="left-menu-body-secondRow-li-span">Terms & Privacy Policy</span>
+                    </li>
+                    <li class="left-menu-body-secondRow-li">
+                        <i class="left-menu-body-secondRow-i">
+                            <svg xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24"><path d="M12,0A12,12,0,1,0,24,12,12.013,12.013,0,0,0,12,0Zm0,22A10,10,0,1,1,22,12,10.011,10.011,0,0,1,12,22Z" /><path d="M12,10H11a1,1,0,0,0,0,2h1v6a1,1,0,0,0,2,0V12A2,2,0,0,0,12,10Z" /><circle cx="12" cy="6.5" r="1.5" /></svg>
+                        </i>
+                        <span class="left-menu-body-secondRow-li-span">About Us</span>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        var AppGlobal = {
+            baseUrl: "@baseUrl",
+            filePath: 'https://akonini-files.azurewebsites.net/file/',
+            masterPersonID: "@masterPersonIDSession",
+            fname: "@firstNameSession",
+            lname: "@lastNameSession",
+            nameInitial: "@nameInitial",
+            fullName: "@fullName"
+        };
+    </script>
+
+    <environment include="Development">
+
+        <script src="~/scripts/script_common.js"></script>
+        <script src="~/scripts/script_main.js"></script>
+        <script src="~/scripts/script_index.js" type="module"></script>
+    </environment>
+    <environment exclude="Development">
+
+        <script src="~/scripts/script_common.js" asp-append-version="true"></script>
+        <script src="~/scripts/script_main.js" asp-append-version="true"></script>
+        <script src="~/scripts/script_index.js" type="module" asp-append-version="true"></script>
+
+    </environment>
+
+    @RenderSection("Scripts", required: false)
+
+
+</body>
+</html>

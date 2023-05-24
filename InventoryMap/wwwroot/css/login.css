@@ -1,0 +1,135 @@
+﻿* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins';
+    color: #0d0d0d;
+    --AKONINI_GOLD: #FFB606;
+    --AKONINI_GRAY: #3B3B3B;
+}
+
+header {
+    height: 80px;
+    padding: 15px 20px;
+}
+
+.login-page-container {
+    height: calc(100vh - 80px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-form {
+    padding: 0 20px;
+    width: 100%;
+    /*margin-top: -150px;*/
+}
+.login-header {
+    margin-bottom: 40px;
+}
+.login-header-h3 {
+    font-size: 22px;
+    text-align: center;
+}
+
+.login-form-group-input {
+    padding: 10px;
+    width: 100%;
+    margin-bottom: 15px;
+    border: 1px solid #d5d5d5;
+    transition: all .5s ease;
+    border-radius: 10px;
+    background: #E7E7E7;
+    font-size: 14px;
+    outline: none;
+}
+
+.forgot-password-wrapper {
+    text-align: right;
+}
+
+.forgot-password-a {
+    text-decoration: none;
+    color: #FFB606;
+}
+
+.forgot-password-small {
+    font-size: 14px;
+    color: #000;
+    transition: all .5s ease;
+}
+
+.login-btn-wrapper {
+    margin-top: 20px;
+}
+
+.login-btn-wrapper button {
+    border-radius: 10px;
+    background: #FFB606;
+    width: 100%;
+    border: none;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all .5s ease;
+    cursor: pointer;
+    position: relative;
+    padding: 10px;
+    height: 45px;
+    color: #FFF;
+
+}
+
+.login-form-group-input:focus {
+    background: #FFF;
+}
+
+.login-btn-wrapper .fb-login {
+    background: #0f8dd2;
+    margin-top: 10px;
+}
+
+input[name=ShowPassword] {
+    margin-right: 10px;
+    transform: scale(1.5);
+    accent-color: #FFB606;
+}
+
+.login-form-group-checkbox {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    font-size: 15px;
+}
+
+.login-form-group-p {
+    font-size: 14px;
+}
+
+
+.login-create-account {
+    margin-top: 40px;
+    width: 100%;
+    text-align: center;
+}
+
+.login-create-account p {
+    font-size: 15px;
+}
+
+.login-create-account a {
+    text-decoration: none;
+    color: #FFB606;
+    font-size: 15px;
+}
+
+.login-form-group .dropdown-container {
+    background: #e7e7e7;
+    transition: all .3s ease;
+}
+
+
+.login-btn-wrapper button:disabled {
+    opacity: .7;
+    pointer-events: none;
+}

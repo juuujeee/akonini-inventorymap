@@ -1,0 +1,194 @@
+﻿
+.userSettings-container {
+    font-size: 20px;
+    width: 100%;
+    padding: 10px;
+    overflow-y: scroll;
+    height: 100%;
+}
+
+.userSettings-section {
+    margin-bottom: 15px;
+    height: auto;
+}
+
+.userSettings-section-header {
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    background: #505358;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+.userSettings-section-header-title {
+    display: grid;
+    grid-template-columns: 20px 1fr;
+    grid-column-gap: 10px;
+}
+
+    .userSettings-section-header-title h3 {
+        font-size: 17px;
+        color: #FFF;
+        font-weight: 500;
+    }
+
+    .userSettings-section-header-title i {
+        display: flex;
+        align-items: center;
+    }
+
+.userSettings-section-header-button {
+    display: flex;
+    text-align: right;
+}
+
+    .userSettings-section-header-button button {
+        font-size: 16px;
+        background: transparent;
+        height: 100%;
+        width: auto;
+        padding: 0 10px;
+        border: none;
+        border-left: 1px groove #d5d5d5;
+        border-right: 1px groove #d5d5d5;
+        color: #FFF;
+        cursor: pointer;
+        transition: all .3s ease;
+    }
+
+    .userSettings-section-header-button span {
+        display: flex;
+        align-items: center;
+        margin-left: 10px;
+    }
+
+
+.account-grid-1 {
+    padding: 10px 0;
+}
+
+.account-grid-2 {
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+}
+
+.account-grid-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-column-gap: 15px;
+    padding: 10px 0;
+}
+
+.userSettings-formGroup {
+    display: flex;
+    flex-direction: column;
+    grid-column-gap: 10px;
+}
+
+    .userSettings-formGroup label {
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+    }
+
+    .userSettings-formGroup input {
+        padding: 7px;
+        width: 100%;
+        border: 1px solid #d5d5d5;
+        transition: all .5s ease;
+        background: #E7E7E7;
+        font-size: 15px;
+        outline: none;
+    }
+
+        .userSettings-formGroup input:focus {
+            background: #FFF;
+        }
+
+.userSettings-formGroup-uploadWrapper {
+    height: 150px;
+    border: 1px solid #d5d5d5;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #E7E7E7;
+    margin-bottom: 15px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+    .userSettings-formGroup-uploadWrapper p {
+        font-size: 14px;
+        color: #757575;
+    }
+
+    .userSettings-formGroup-uploadWrapper img[src=""] {
+        display: none;
+    }
+
+    .userSettings-formGroup-uploadWrapper img {
+        width: auto;
+        height: 100%;
+    }
+
+.userSettings-section-body {
+    padding: 10px 0;
+}
+
+    .userSettings-section-body.disable-form input,
+    .userSettings-section-body.disable-form .userSettings-formGroup-uploadWrapper {
+        pointer-events: none;
+        opacity: .7;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+
+.userSettings-formGroup-uploadWrapper .removeFileBtn {
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-size: 16px;
+    font-weight: 600;
+    font-style: normal;
+    padding: 10px;
+}
+
+
+.page-filter {
+    height: 70px;
+    padding: 15px 20px;
+    background: #FFB606;
+    /*border-bottom-right-radius: 50px;*/
+    position: fixed;
+    z-index: 999;
+    width: 100%;
+    top: 79px;
+}
+
+.page-filter-profile {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+    .page-filter-profile h3 {
+        color: #111;
+        font-size: 20px;
+    }
+
+.userSettings-main-container {
+    height: calc(100vh - 150px);
+    margin-top: 89px;
+}
+
+
+.pass-requirement-note {
+    font-size: 15px;
+    margin-top: 10px;
+}
