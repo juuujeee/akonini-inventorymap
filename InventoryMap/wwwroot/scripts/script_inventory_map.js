@@ -49,6 +49,8 @@ export default function inventoryMap(projectObj) {
 
         doc.querySelector('.jsBack').addEventListener('click', handleBackButtonClick);
 
+        document.querySelector('#favDialog').showModal();
+
         contentWrapper.appendChild(doc);
     }
 
