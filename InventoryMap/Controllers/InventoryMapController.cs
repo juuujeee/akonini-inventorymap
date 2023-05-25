@@ -17,6 +17,7 @@ namespace InventoryMap.Controllers
         }
 
         [Route("inventorymapimage")]
+
         public IActionResult Get(int id)
         {
             ProjectInventoryMapParamDataModel model = new ProjectInventoryMapParamDataModel

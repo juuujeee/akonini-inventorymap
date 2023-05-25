@@ -34,14 +34,12 @@ export default function inventoryMap(projectObj) {
 
         uploadBtn.addEventListener('click', handleClickUploadBtn);
 
-        console.log(inventoryMapFileName);
-
         if (inventoryMapFileName != null) {
 
             doc.querySelector('.projectList-header-title h3').textContent = 'Project Inventory Map';
             doc.querySelector('.projectlist-body').innerHTML = '';
 
-            doc.querySelector('.projectlist-body').appendChild(displayProjectInventoryMap());
+            doc.querySelector('.projectlist-body').appendChild(await displayProjectInventoryMap());
         }
 
 
@@ -49,7 +47,10 @@ export default function inventoryMap(projectObj) {
 
         doc.querySelector('.jsBack').addEventListener('click', handleBackButtonClick);
 
-        document.querySelector('#favDialog').showModal();
+        //doc.querySelector('.jsClickDialog').addEventListener('click', function (e) {
+        //    document.querySelector('#favDialog').showModal();
+
+        //})
 
         contentWrapper.appendChild(doc);
     }
@@ -58,15 +59,96 @@ export default function inventoryMap(projectObj) {
         history.back();
     }
 
-    function displayProjectInventoryMap() {
+    async function displayProjectInventoryMap() {
 
         let view = `
                     <div class="svgFileUploadContainer jsSvgFileContainer" style="height: calc(100vh - 224px)">
-                        <embed type="image/svg+xml" src="${inventoryMapFileNameURL}" style="height: 100%; width: 100%">
+                        
                     </div>
                 `;
 
-        return new DOMParser().parseFromString(view, 'text/html').querySelector('.jsSvgFileContainer');
+
+        let doc = new DOMParser().parseFromString(view, 'text/html').querySelector('.jsSvgFileContainer');
+
+        let svgEl;
+
+        await fetch(inventoryMapFileNameURL)
+            .then(response => response.text())
+            .then(svgText => {
+
+                svgEl = new DOMParser().parseFromString(svgText, 'text/html').querySelector('svg');
+
+            })
+            .catch(error => {
+                console.error("Error fetching SVG file:", error);
+            });
+
+        doc.appendChild(svgEl);
+
+        doc.querySelectorAll('[data-lotid]').forEach((item) => {
+
+            item.parentElement.addEventListener("click", async function () {
+
+                let lotID = item.getAttribute('data-lotid');
+
+                showLotDetail(lotID);
+            });
+
+        });
+
+
+        return doc;
+    }
+
+    function showLotDetail(lotID) {
+
+        let modalContentCss = "width: 95%; margin-left: auto; margin-right: auto; top: 50%; transform: translateY(-50%); left: unset";
+
+        const modalView = `<div class="modal-container jsModal">
+                                    <div class="modal-content" style="${modalContentCss}">
+                                        <div class="modal-header">
+                                            <h2 class="jsTitleName">Lot Detail</h2>
+                                            <span class="close-modal jsCloseModal">✕</span>
+                                        </div>
+                                        <div class="modal-body">
+                                            <input type="hidden" name="LotID" class="jsLotID" value="${lotID}"/>
+                                            <div class="project-form-group">
+                                               <input type="text" class="jsProjectName" placeholder="Project Name" value="${projectName}" required />
+                                            </div>
+                                            <div class="project-form-group">
+                                               <input type="text" class="jsLotName" placeholder="Lot Name" required />
+                                            </div>
+                                            <div class="project-form-group">
+                                                <div class="dropdown-container hasDropdown">
+                                                    <input type="text" name="Status" class="jsStatus dropdown-container-input" placeholder="Status" required>
+                                                    <i class="dropdown-container-icon">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M201.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 338.7 54.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"></path></svg>
+                                                    </i>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="project-form-group">
+                                                <div class="dropdown-container hasDropdown">
+                                                    <input type="text" name="RentOrSale" class="jsRentOrSaleName dropdown-container-input" placeholder="Rent or Sale" required>
+                                                    <i class="dropdown-container-icon">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M201.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 338.7 54.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"></path></svg>
+                                                    </i>
+                                                </div>
+                                            </div>
+                                               
+                                            <button class="jsSaveNewProject modal-saveProject">Update</button>
+                                        </div>
+                                    </div>
+                                </div>`;
+
+        const modalParse = new DOMParser().parseFromString(modalView, 'text/html').querySelector('.jsModal');
+
+        modalParse.querySelector('.jsCloseModal').addEventListener('click', function (e) {
+
+            this.closest('.jsModal').remove()
+        });
+
+        document.body.append(modalParse);
     }
 
     async function handleClickUploadBtn(e) {
@@ -205,6 +287,7 @@ export default function inventoryMap(projectObj) {
             await mainHtml();
 
             globalFuncObj.loader.stop();
+
 
         }
     }

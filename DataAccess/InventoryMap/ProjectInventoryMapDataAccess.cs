@@ -60,7 +60,7 @@ namespace DataAccess.InventoryMap
                             {
                                 reader.Read();
                                 returnDataModel.ImageFileName = reader["ImageFileName"].ToString();
-                                returnDataModel.ImageFileUrl = $"https://akonini-files.azurewebsites.net/File/{Convert.ToBase64String(Encoding.UTF8.GetBytes(reader["ImageFileName"].ToString()))}";
+                                returnDataModel.ImageFileUrl = $"https://akonini-files.azurewebsites.net/svgfile/{Convert.ToBase64String(Encoding.UTF8.GetBytes(reader["ImageFileName"].ToString()))}";
                             }
                            
                         }
