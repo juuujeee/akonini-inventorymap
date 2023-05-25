@@ -48,6 +48,7 @@
     <Compile Include="Helper\EncryptDecryptDataHelper.cs" />
     <Compile Include="Helper\StringCipher.cs" />
     <Compile Include="Helper\TimeAgoHelper.cs" />
+    <Compile Include="Interfaces\Customs\IGetProjectInventoryMapData.cs" />
     <Compile Include="Interfaces\Customs\IGetProjectListData.cs" />
     <Compile Include="Interfaces\Customs\IGetUserLoginData.cs" />
     <Compile Include="Interfaces\Customs\IProjectLotsNewData.cs" />
@@ -58,6 +59,8 @@
     <Compile Include="Model\InventoryMap\ProjectLotFromInventoryMapParamDataModel.cs" />
     <Compile Include="Model\InventoryMap\ProjectLotFromInventoryMapRefDataModel.cs" />
     <Compile Include="Model\InventoryMap\ProjectLotFromInventoryMapReturnDataModel.cs" />
+    <Compile Include="Model\InventoryMap\ProjectInventoryMapParamDataModel.cs" />
+    <Compile Include="Model\InventoryMap\ProjectInventoryMapReturnDataModel.cs" />
     <Compile Include="Model\Project\ProjectListParamDataModel.cs" />
     <Compile Include="Model\Project\ProjectListRefDataModel.cs" />
     <Compile Include="Model\Project\ProjectListReturnDataModel.cs" />

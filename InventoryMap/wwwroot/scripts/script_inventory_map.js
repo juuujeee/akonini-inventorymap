@@ -11,12 +11,14 @@ export default function inventoryMap(projectObj) {
     let svgDoc = null;
     let file = null;
 
+    let inventoryMapFileName = null;
+    let inventoryMapFileNameURL = null;
 
     async function mainHtml() {
 
         contentWrapper.innerHTML = '';
 
-        let view = await globalFuncObj.fetchView(AppGlobal.baseUrl + 'inventorymap');
+        let view = await globalFuncObj.fetchView(AppGlobal.baseUrl + `inventorymapupload`);
 
         let doc = new DOMParser().parseFromString(view, 'text/html').querySelector('.jsInventoryMapContainer');
 
@@ -32,6 +34,17 @@ export default function inventoryMap(projectObj) {
 
         uploadBtn.addEventListener('click', handleClickUploadBtn);
 
+        console.log(inventoryMapFileName);
+
+        if (inventoryMapFileName != null) {
+
+            doc.querySelector('.projectList-header-title h3').textContent = 'Project Inventory Map';
+            doc.querySelector('.projectlist-body').innerHTML = '';
+
+            doc.querySelector('.projectlist-body').appendChild(displayProjectInventoryMap());
+        }
+
+
         doc.querySelector('.jsProjectTitle').textContent = projectName;
 
         doc.querySelector('.jsBack').addEventListener('click', handleBackButtonClick);
@@ -41,6 +54,17 @@ export default function inventoryMap(projectObj) {
 
     function handleBackButtonClick() {
         history.back();
+    }
+
+    function displayProjectInventoryMap() {
+
+        let view = `
+                    <div class="svgFileUploadContainer jsSvgFileContainer" style="height: calc(100vh - 224px)">
+                        <embed type="image/svg+xml" src="${inventoryMapFileNameURL}" style="height: 100%; width: 100%">
+                    </div>
+                `;
+
+        return new DOMParser().parseFromString(view, 'text/html').querySelector('.jsSvgFileContainer');
     }
 
     async function handleClickUploadBtn(e) {
@@ -166,6 +190,15 @@ export default function inventoryMap(projectObj) {
         init: async function () {
 
             globalFuncObj.loader.start();
+
+            let data = await globalFuncObj.fetchDataGet(`${AppGlobal.baseUrl}inventorymapimage/?id=${projectID}`);
+
+            console.log(data);
+
+            if (!data.HasError) {
+                inventoryMapFileName = data.ImageFileName;
+                inventoryMapFileNameURL = data.ImageFileUrl;
+            }
 
             await mainHtml();
 

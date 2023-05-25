@@ -195,3 +195,12 @@
     text-decoration: none;
     position: relative;
 }
+
+
+.allowfullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #FFF;
+    z-index: 999;
+}

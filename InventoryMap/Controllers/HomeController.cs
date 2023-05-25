@@ -21,6 +21,12 @@ namespace InventoryMap.Controllers
             return View();
         }
 
+        [Route("/indexview")]
+        public IActionResult IndexView()
+        {
+            return PartialView("~/Views/Home/IndexView.cshtml");
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

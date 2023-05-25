@@ -10,19 +10,31 @@ namespace InventoryMap.Controllers
     public class InventoryMapController : Controller
     {
 
-        [Route("inventorymap")]
-        public IActionResult Index()
+        [Route("inventorymapupload/")]
+        public IActionResult UploadInventoryMap()
         {
-            return PartialView("~/Views/InventoryMap/Index.cshtml");
+            return PartialView("~/Views/InventoryMap/UploadInventoryMap.cshtml");
         }
+
+        [Route("inventorymapimage")]
+        public IActionResult Get(int id)
+        {
+            ProjectInventoryMapParamDataModel model = new ProjectInventoryMapParamDataModel
+            {
+                MasterProjectID = id
+            };
+
+            IGetProjectInventoryMapData dataLogic = new ProjectInventoryMapDataLogic(model);
+
+            return Json(dataLogic.GetProjectInventoryMapData());
+        }
+
 
         [Route("/inventory-map/new")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Projectinventory(ProjectLotFromInventoryMapParamDataModel projectLot)
         {
-
-
             try
             {
                 if (ModelState.IsValid)

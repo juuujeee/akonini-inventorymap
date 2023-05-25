@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="InventoryMap\ProjectInventoryMapDataLogic.cs" />
     <Compile Include="InventoryMap\ProjectLotsNewDataLogic.cs" />
     <Compile Include="Project\ProjectListDataLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

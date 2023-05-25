@@ -7,7 +7,15 @@ export default function home() {
 
     let projectList = [];
 
-    function mainHtml() {
+    async function mainHtml() {
+
+        contentWrapper.innerHTML = '';
+
+        let view = await globalFuncObj.fetchView(AppGlobal.baseUrl + 'indexview');
+
+        let doc = new DOMParser().parseFromString(view, 'text/html').querySelector('.jsHomePageContainer');
+
+        contentWrapper.appendChild(doc);
 
         let projectNameInput = contentWrapper.querySelector('.jsProjectName');
 
