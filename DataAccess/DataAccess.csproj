@@ -203,6 +203,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="InventoryMap\ProjectInventoryMapDataAccess.cs" />
+    <Compile Include="InventoryMap\ProjectLotNameUpdateDataAccess.cs" />
     <Compile Include="InventoryMap\ProjectLotsNewDataAccess.cs" />
     <Compile Include="Project\ProjectListDataAccess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

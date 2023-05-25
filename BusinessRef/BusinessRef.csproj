@@ -61,6 +61,8 @@
     <Compile Include="Model\InventoryMap\ProjectLotFromInventoryMapReturnDataModel.cs" />
     <Compile Include="Model\InventoryMap\ProjectInventoryMapParamDataModel.cs" />
     <Compile Include="Model\InventoryMap\ProjectInventoryMapReturnDataModel.cs" />
+    <Compile Include="Model\InventoryMap\ProjectLotNameUpdateParamDataModel.cs" />
+    <Compile Include="Model\InventoryMap\ProjectLotNameUpdateReturnDataModel.cs" />
     <Compile Include="Model\Project\ProjectListParamDataModel.cs" />
     <Compile Include="Model\Project\ProjectListRefDataModel.cs" />
     <Compile Include="Model\Project\ProjectListReturnDataModel.cs" />
