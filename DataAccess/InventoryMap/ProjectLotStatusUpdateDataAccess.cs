@@ -10,14 +10,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using model = BusinessRef.Model.InventoryMap.ProjectLotNameUpdateReturnDataModel;
+using model = BusinessRef.Model.InventoryMap.ProjectLotStatusUpdateReturnDataModel;
 
 namespace DataAccess.InventoryMap
 {
-    public class ProjectLotNameUpdateDataAccess : IPostDatabaseData<model>
+    public class ProjectLotStatusUpdateDataAccess : IPostDatabaseData<model>
     {
-        private readonly ProjectLotNameUpdateParamDataModel _dataModel;
-        public ProjectLotNameUpdateDataAccess(ProjectLotNameUpdateParamDataModel dataModel)
+        private readonly ProjectLotStatusUpdateParamDataModel _dataModel;
+        public ProjectLotStatusUpdateDataAccess(ProjectLotStatusUpdateParamDataModel dataModel)
         {
             _dataModel = dataModel;
         }
@@ -38,12 +38,12 @@ namespace DataAccess.InventoryMap
                 using (SqlCommand cmd = new SqlCommand())
                 {
                     cmd.Connection = con;
-                    cmd.CommandText = "[akonini.web.developer].[spUpdateProjectLotName]";
+                    cmd.CommandText = "[akonini.web.developer].[spUpdateProjectLotStatus]";
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     cmd.Parameters.Add(new SqlParameter { ParameterName = "@LotID", SqlDbType = SqlDbType.Int, Value = _dataModel.LotID });
                     cmd.Parameters.Add(new SqlParameter { ParameterName = "@MasterProjectID", SqlDbType = SqlDbType.Int, Value = _dataModel.MasterProjectID });
-                    cmd.Parameters.Add(new SqlParameter { ParameterName = "@LotName", SqlDbType = SqlDbType.NVarChar, Value = _dataModel.LotName });
+                    cmd.Parameters.Add(new SqlParameter { ParameterName = "@ProjectLotStatusID", SqlDbType = SqlDbType.Int, Value = _dataModel.ProjectLotStatusID });
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
@@ -63,7 +63,7 @@ namespace DataAccess.InventoryMap
                             {
                                 reader.Read();
                                 returnDataModel.StatusCodeNumber = Convert.ToInt32(reader["StatusCodeNumber"].ToString());
-                                
+
                             }
 
                         }

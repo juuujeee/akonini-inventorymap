@@ -50,6 +50,8 @@
     <Compile Include="Helper\TimeAgoHelper.cs" />
     <Compile Include="Interfaces\Customs\IGetProjectInventoryMapData.cs" />
     <Compile Include="Interfaces\Customs\IGetProjectListData.cs" />
+    <Compile Include="Interfaces\Customs\IGetProjectLotNameUpdateData.cs" />
+    <Compile Include="Interfaces\Customs\IGetProjectLotStatusUpdateData.cs" />
     <Compile Include="Interfaces\Customs\IGetUserLoginData.cs" />
     <Compile Include="Interfaces\Customs\IProjectLotsNewData.cs" />
     <Compile Include="Interfaces\Generics\IGetDatabaseData.cs" />
@@ -63,6 +65,8 @@
     <Compile Include="Model\InventoryMap\ProjectInventoryMapReturnDataModel.cs" />
     <Compile Include="Model\InventoryMap\ProjectLotNameUpdateParamDataModel.cs" />
     <Compile Include="Model\InventoryMap\ProjectLotNameUpdateReturnDataModel.cs" />
+    <Compile Include="Model\InventoryMap\ProjectLotStatusUpdateParamDataModel.cs" />
+    <Compile Include="Model\InventoryMap\ProjectLotStatusUpdateReturnDataModel.cs" />
     <Compile Include="Model\Project\ProjectListParamDataModel.cs" />
     <Compile Include="Model\Project\ProjectListRefDataModel.cs" />
     <Compile Include="Model\Project\ProjectListReturnDataModel.cs" />

@@ -72,8 +72,90 @@ namespace InventoryMap.Controllers
                 return Json(new { StatusCodeNumber = 0, ErrorMessage = ex.Message }); 
             }
 
-           
+        }
 
+
+        [Route("inventory-map/projectlotnameupdate")]
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public IActionResult ProjectLotNameUpdate(ProjectLotNameUpdateParamDataModel model)
+        {
+            try
+            {
+                if(ModelState.IsValid)
+                {
+                    IGetProjectLotNameUpdateData dataLogic = new ProjectLotNameUpdateDataLogic(model);
+
+                    return Json(dataLogic.GetProjectLotNameUpdateData());
+                }
+                else
+                {
+                    var modelErrors = new Dictionary<string, string>();
+
+                    foreach (var modelStatekey in ModelState.Keys)
+                    {
+                        var value = ModelState[modelStatekey];
+
+                        if (value is not null)
+                        {
+                            foreach (var modelError in value.Errors)
+                            {
+                                modelErrors.Add(modelStatekey, modelError.ErrorMessage);
+                            }
+                        }
+
+                    }
+                    return Json(new { StatusCodeNumber = -1, responseText = modelErrors });
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return Json(new { StatusCodeNumber = 0, ErrorMessage = ex.Message });
+
+            }
+
+        }
+
+
+        [Route("inventory-map/projectlotstatusupdate")]
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public IActionResult ProjectLotStatusUpdate(ProjectLotStatusUpdateParamDataModel model)
+        {
+            try
+            {
+                if(ModelState.IsValid)
+                {
+                    IGetProjectLotStatusUpdateData dataLogic = new ProjectLotStatusUpdateDataLogic(model);
+
+                    return Json(dataLogic.GetProjectLotStatusUpdateData());
+                }
+                else
+                {
+                    var modelErrors = new Dictionary<string, string>();
+
+                    foreach (var modelStatekey in ModelState.Keys)
+                    {
+                        var value = ModelState[modelStatekey];
+
+                        if (value is not null)
+                        {
+                            foreach (var modelError in value.Errors)
+                            {
+                                modelErrors.Add(modelStatekey, modelError.ErrorMessage);
+                            }
+                        }
+
+                    }
+                    return Json(new { StatusCodeNumber = -1, responseText = modelErrors });
+                }
+            }
+            catch(Exception ex)
+            {
+                return Json(new { StatusCodeNumber = 0, ErrorMessage = ex.Message });
+
+            }
         }
     }
 }
