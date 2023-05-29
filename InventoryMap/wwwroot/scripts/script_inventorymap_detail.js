@@ -72,7 +72,9 @@ export default function inventoryMapDetail(projectObj) {
 
            // console.log(lotDetailObj);
 
-            item.nextElementSibling.textContent = lotDetailObj.LotName;
+            if (item.nextElementSibling) {
+                item.nextElementSibling.textContent = lotDetailObj.LotName;
+            }
 
             if (lotDetailObj.ProjectLotStatusID == 2) {
                 //reserved
@@ -261,7 +263,9 @@ export default function inventoryMapDetail(projectObj) {
 
                         if (item.getAttribute('data-lotid') == lotID) {
 
-                            item.nextElementSibling.textContent = lotName;
+                            if (item.nextElementSibling) {
+                                item.nextElementSibling.textContent = lotName;
+                            }
 
                             break;
                         }
