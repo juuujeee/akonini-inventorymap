@@ -5,7 +5,7 @@
   "scope": "/",
   "start_url": "/",
   "name": "Akonini Inventory Map Admin",
-  "short_name": "Akonini IMA",
+  "short_name": "Akonini IMAP",
   "icons": [
     {
       "src": "/images/icon-192x192.png",
