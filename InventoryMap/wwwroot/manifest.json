@@ -4,8 +4,8 @@
   "display": "standalone",
   "scope": "/",
   "start_url": "/",
-  "name": "Akonini",
-  "short_name": "Akonini",
+  "name": "Akonini Inventory Map Admin",
+  "short_name": "Akonini IMA",
   "icons": [
     {
       "src": "/images/icon-192x192.png",
