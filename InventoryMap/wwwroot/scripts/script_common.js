@@ -2073,3 +2073,23 @@ document.querySelectorAll('.jsComingSoon').forEach((item) => {
     });
 
 });
+
+
+var previousWidth = window.innerWidth;
+
+function handleZoom() {
+    console.log('zoom');
+
+    var currentWidth = window.innerWidth;
+    var imageWidth = document.querySelector("#no-zoom").width;
+    document.querySelector("#no-zoom").style = "position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); " + "width: " + imageWidth - currentWidth + "px;";
+    console.log(document.querySelector("#no-zoom").width - currentWidth);
+    if (currentWidth < previousWidth) {
+        console.log("Zoom in");
+    } else if (currentWidth > previousWidth) {
+        console.log("Zoom out");
+    }
+    previousWidth = currentWidth;
+}
+
+window.addEventListener('resize', handleZoom);

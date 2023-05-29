@@ -10,17 +10,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using model = BusinessRef.Model.InventoryMap.ProjectInventoryMapReturnDataModel;
+using model = BusinessRef.Model.InventoryMap.ProjectLotUpdateRefReturnDataModel;
 
 namespace DataAccess.InventoryMap
 {
-    public class ProjectInventoryMapDataAccess : IGetDatabaseData<model>
+    public class ProjectLotUpdateRefDataAccess : IGetDatabaseData<model>
     {
-        private readonly ProjectInventoryMapParamDataModel _dataModel;
-        public ProjectInventoryMapDataAccess(ProjectInventoryMapParamDataModel dataModel)
+        private readonly ProjectLotUpdateRefParamDataModel _dataModel;
+        public ProjectLotUpdateRefDataAccess(ProjectLotUpdateRefParamDataModel dataModel)
         {
             _dataModel = dataModel;
         }
+
         public model GetDatabaseData()
         {
             IConfigurationBuilder builder = new ConfigurationBuilder();
@@ -37,10 +38,11 @@ namespace DataAccess.InventoryMap
                 using (SqlCommand cmd = new SqlCommand())
                 {
                     cmd.Connection = con;
-                    cmd.CommandText = "[akonini.web.developer].[spGetProjectInventoryMap_Admin]";
+                    cmd.CommandText = "[akonini.web.developer].[spGetUpdateProjectLotRef]";
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     cmd.Parameters.Add(new SqlParameter { ParameterName = "@MasterProjectID", SqlDbType = SqlDbType.Int, Value = _dataModel.MasterProjectID });
+                    cmd.Parameters.Add(new SqlParameter { ParameterName = "@LotID", SqlDbType = SqlDbType.Int, Value = _dataModel.LotID });
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
@@ -56,21 +58,39 @@ namespace DataAccess.InventoryMap
                         }
                         else
                         {
-                            returnDataModel.InventoryMap = new List<ProjectInventoryMapRefDataModel>();
+                            returnDataModel.RecordData = new ProjectLotIndividualRefDataModel();
+                            returnDataModel.StatusList = new List<ProjectLotStatusRefDataModel>();
+
+                            if (reader.HasRows)
+                            {
+                                reader.Read();
+
+                                returnDataModel.RecordData.ID = Convert.ToInt32(reader["ID"]);
+                                returnDataModel.RecordData.LotID = Convert.ToInt32(reader["LotID"]);
+                                returnDataModel.RecordData.MasterProjectID = Convert.ToInt32(reader["MasterProjectID"]);
+                                returnDataModel.RecordData.LotName = reader["LotName"].ToString();
+                                returnDataModel.RecordData.ProjectLotStatusID = Convert.ToInt32(reader["ProjectLotStatusID"]);
+                                returnDataModel.RecordData.ProjectLotStatusName = reader["ProjectLotStatusName"].ToString();
+                            }
+
+
+                            reader.NextResult();
 
                             while(reader.Read())
                             {
-                                returnDataModel.InventoryMap.Add(new ProjectInventoryMapRefDataModel
+                                returnDataModel.StatusList.Add(new ProjectLotStatusRefDataModel()
                                 {
-                                    ImageFileName = reader["ImageFileName"].ToString(),
-                                    ImageCaption = reader["ImageCaption"].ToString(),
-                                    ImageFileUrl = $"https://akonini-files.azurewebsites.net/svgfile/{Convert.ToBase64String(Encoding.UTF8.GetBytes(reader["ImageFileName"].ToString()))}"
+                                    ID = Convert.ToInt32(reader["ID"]),
+                                    ProjectLotStatusName = reader["ProjectLotStatusName"].ToString()
                                 });
                             }
-                           
+
+                            reader.NextResult();
+                            reader.Read();
+
+                            returnDataModel.StatusCodeNumber = Convert.ToInt32(reader["StatusCodeNumber"]);
                         }
                     }
-
 
                 }
             }

@@ -10,17 +10,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using model = BusinessRef.Model.InventoryMap.ProjectInventoryMapReturnDataModel;
+using model = BusinessRef.Model.InventoryMap.ProjectLotRecordReturnDataModel;
 
 namespace DataAccess.InventoryMap
 {
-    public class ProjectInventoryMapDataAccess : IGetDatabaseData<model>
+    public class ProjectLotRecordDataAccess : IGetDatabaseData<model>
     {
-        private readonly ProjectInventoryMapParamDataModel _dataModel;
-        public ProjectInventoryMapDataAccess(ProjectInventoryMapParamDataModel dataModel)
+        private readonly ProjectLotRecordParamDataModel _dataModel;
+        public ProjectLotRecordDataAccess(ProjectLotRecordParamDataModel dataModel)
         {
             _dataModel = dataModel;
         }
+
         public model GetDatabaseData()
         {
             IConfigurationBuilder builder = new ConfigurationBuilder();
@@ -37,7 +38,7 @@ namespace DataAccess.InventoryMap
                 using (SqlCommand cmd = new SqlCommand())
                 {
                     cmd.Connection = con;
-                    cmd.CommandText = "[akonini.web.developer].[spGetProjectInventoryMap_Admin]";
+                    cmd.CommandText = "[akonini.web.developer].[spGetProjectLots]";
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     cmd.Parameters.Add(new SqlParameter { ParameterName = "@MasterProjectID", SqlDbType = SqlDbType.Int, Value = _dataModel.MasterProjectID });
@@ -56,18 +57,20 @@ namespace DataAccess.InventoryMap
                         }
                         else
                         {
-                            returnDataModel.InventoryMap = new List<ProjectInventoryMapRefDataModel>();
+                            returnDataModel.ProjectLotRecords = new List<ProjectLotRecordDataModel>();
 
                             while(reader.Read())
                             {
-                                returnDataModel.InventoryMap.Add(new ProjectInventoryMapRefDataModel
+                                returnDataModel.ProjectLotRecords.Add(new ProjectLotRecordDataModel
                                 {
-                                    ImageFileName = reader["ImageFileName"].ToString(),
-                                    ImageCaption = reader["ImageCaption"].ToString(),
-                                    ImageFileUrl = $"https://akonini-files.azurewebsites.net/svgfile/{Convert.ToBase64String(Encoding.UTF8.GetBytes(reader["ImageFileName"].ToString()))}"
+                                    ProjectLotID = Convert.ToInt32(reader["ProjectLotID"]),
+                                    LotID = Convert.ToInt32(reader["LotID"]),
+                                    ProjectLotStatusID = Convert.ToInt32(reader["ProjectLotStatusID"]),
+                                    ProjectLotStatusName = reader["ProjectLotStatusName"].ToString(),
+                                    LotName = reader["LotName"].ToString()
                                 });
                             }
-                           
+
                         }
                     }
 

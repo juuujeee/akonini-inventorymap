@@ -1,5 +1,8 @@
 ﻿
 import home from "./script_home.js";
+import inventoryMapList from "./script_inventorymap_list.js";
+import inventoryMapNew from "./script_inventorymap_new.js";
+import inventoryMapDetail from "./script_inventorymap_detail.js";
 
 const router = function (params = {}) {
 
@@ -18,7 +21,25 @@ const router = function (params = {}) {
         case (baseUrl):
             view = home();
             break;
-       
+
+        case (baseUrl + 'inventorymap-list'):
+
+            view = inventoryMapList({ ProjectID: params.id, ProjectName: params.name });
+
+            break;
+
+        case (baseUrl + 'inventorymap-upload'):
+
+            view = inventoryMapNew({ ProjectID: params.id, ProjectName: params.name });
+
+            break;
+
+
+        case (baseUrl + 'inventorymap-detail'):
+
+            view = inventoryMapDetail({ ProjectID: params.id, ProjectName: params.name, InventoryMapUrl: params.url });
+
+            break;
     }
 
     if (view) {

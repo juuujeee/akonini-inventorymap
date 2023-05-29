@@ -8,5 +8,6 @@ namespace BusinessRef.Model.InventoryMap
         public string SVGFileName { get; set; }
         public int MasterProjectID { get; set; }
         public int MasterPersonID { get; set; }
+        public string ImageCaption { get; set; }
     }
 }

@@ -16,6 +16,12 @@ namespace InventoryMap.Controllers
             return PartialView("~/Views/InventoryMap/UploadInventoryMap.cshtml");
         }
 
+        [Route("inventorymaplist/")]
+        public IActionResult InventoryMapList()
+        {
+            return PartialView("~/Views/InventoryMap/List.cshtml");
+        }
+
         [Route("inventorymapimage")]
 
         public IActionResult Get(int id)
@@ -156,6 +162,35 @@ namespace InventoryMap.Controllers
                 return Json(new { StatusCodeNumber = 0, ErrorMessage = ex.Message });
 
             }
+        }
+
+
+        [Route("inventory-map/projectlotupdateref/{lotID}/{masterProjectID}")]
+        public IActionResult ProjectLotUpdateRef(int lotID, int masterProjectID)
+        {
+            ProjectLotUpdateRefParamDataModel model = new ProjectLotUpdateRefParamDataModel
+            {
+                LotID = lotID,
+                MasterProjectID = masterProjectID
+            };
+
+            IGetProjectLotUpdateRefData dataLogic = new ProjectLotUpdateRefDataLogic(model);
+
+            return Json(dataLogic.GetProjectLotUpdateRefData());
+        }
+
+
+        [Route("inventory-map/getprojectlots")]
+        public IActionResult GetProjectLots(int masterProjectID)
+        {
+            ProjectLotRecordParamDataModel model = new ProjectLotRecordParamDataModel
+            {
+                MasterProjectID = masterProjectID
+            };
+
+            IGetProjectLotRecordData dataLogic = new ProjectLotRecordDataLogic(model);
+
+            return Json(dataLogic.GetProjectLotRecordData());
         }
     }
 }

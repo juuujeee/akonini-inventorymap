@@ -702,12 +702,17 @@ p.return-msg {
     grid-template-columns: 20px 1fr;
 }
 
-    .back-to-homepage-container span {
-        font-size: 14px;
-        font-weight: 600;
-    }
+.back-to-homepage-container span {
+    font-size: 14px;
+    font-weight: 600;
+}
 
-    .back-to-homepage-container i {
-        display: flex;
-        align-items: center;
-    }
+.back-to-homepage-container i {
+    display: flex;
+    align-items: center;
+}
+
+
+.data-link > * {
+    pointer-events: none;
+}

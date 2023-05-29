@@ -169,7 +169,7 @@
 
 .svgFileUploadContainer {
     display: flex;
-    height: 500px;
+    height: 450px;
     width: 100%;
     align-items: center;
     justify-content: center;
@@ -203,4 +203,67 @@
     left: 0;
     background: #FFF;
     z-index: 999;
+}
+
+.lot-detail-form {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-column-gap: 10px;
+    margin-bottom: 10px;
+}
+.lot-detail-form input,
+.lot-detail-form .dropdown-container {
+    margin-bottom: 0;
+}
+
+.lot-detail-form-btnContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lot-detail-form-btnContainer button {
+    padding: 3px 10px;
+
+}
+
+.lot-detail-form.disabled input,
+.lot-detail-form.disabled .dropdown-container {
+    opacity: .7;
+}
+
+.lot-detail-form.disabled .dropdown-container {
+    pointer-events: none;
+}
+
+.lotDetail-form {
+
+}
+
+
+.upload-svg-new {
+    display: block;
+    text-align: center;
+    padding: 10px;
+    width: 80px;
+    background: #999;
+    padding: 7px;
+    color: #FFF;
+    border: none;
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: 14px;
+    text-align: center;
+    text-decoration: none;
+    position: relative;
+}
+
+
+.projectinventorymap-form-group input {
+    background-color: #FFF;
+    border: none;
+    width: 100%;
+    padding: 10px;
+    outline: none;
+    margin-bottom: 10px;
 }

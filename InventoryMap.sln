@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33122.133
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventoryMap", "InventoryMap\InventoryMap.csproj", "{F32B222A-33D7-4379-A2CE-E0B8C00E417B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InventoryMap", "InventoryMap\InventoryMap.csproj", "{F32B222A-33D7-4379-A2CE-E0B8C00E417B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessRef", "BusinessRef\BusinessRef.csproj", "{6147D2C3-F62D-430F-83DF-FC558488DBFE}"
 EndProject
