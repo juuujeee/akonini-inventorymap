@@ -234,7 +234,7 @@ export default function inventoryMapDetail(projectObj) {
 
             let data = await globalFuncObj.fetchDataPost(AppGlobal.baseUrl + 'inventory-map/projectlotnameupdate', formData);
 
-            console.log(data);
+            //console.log(data);
 
             if (data.HasError) {
                 throw alertMessages.databaseError;
@@ -303,7 +303,7 @@ export default function inventoryMapDetail(projectObj) {
 
             let data = await globalFuncObj.fetchDataPost(AppGlobal.baseUrl + 'inventory-map/projectlotstatusupdate', formData);
 
-            console.log(data);
+            //console.log(data);
 
             if (data.HasError) {
                 throw alertMessages.databaseError;
