@@ -45,6 +45,8 @@ export default function inventoryMapNew(projectObj) {
 
     async function handleClickUploadBtn(e) {
 
+        globalFuncObj.loader.start();
+
         if (validateFile() && validateForm()) {
 
             let uploadAzureFunc = await uploadAzure();
@@ -83,7 +85,6 @@ export default function inventoryMapNew(projectObj) {
 
             console.log(data);
 
-            globalFuncObj.loader.start();
 
             if (data.HasError) {
                 throw alertMessages.databaseError
