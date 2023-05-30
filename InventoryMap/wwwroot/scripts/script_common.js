@@ -39,7 +39,9 @@ const globalFuncObj = {
                 return res.json()
             }
             else if (res.status == 440) {
-                throw alertMessages.sessionExpired
+                //throw alertMessages.sessionExpired
+                window.location.href = AppGlobal.baseUrl;
+
             }
             else if (res.status == 409) {
                 throw alertMessages.throttleError;
@@ -79,7 +81,9 @@ const globalFuncObj = {
                 return res.json()
             }
             else if (res.status == 440) {
-                throw alertMessages.sessionExpired
+                //throw alertMessages.sessionExpired
+                window.location.href = AppGlobal.baseUrl;
+
             }
             else {
                 throw alertMessages.serverError
@@ -111,7 +115,9 @@ const globalFuncObj = {
                 return res.text()
             }
             else if (res.status == 440) {
-                throw alertMessages.sessionExpired
+                //throw alertMessages.sessionExpired
+                window.location.href = AppGlobal.baseUrl;
+
             }
             else if (res.status == 409) {
                 throw alertMessages.throttleError;
