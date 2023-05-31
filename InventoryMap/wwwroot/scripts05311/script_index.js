@@ -37,7 +37,7 @@ const router = function (params = {}) {
 
         case (baseUrl + 'inventorymap-detail'):
 
-            view = inventoryMapDetail({ ProjectID: params.id, ProjectName: params.name, InventoryMapUrl: params.url });
+            view = inventoryMapDetail({ ProjectID: params.id, ProjectName: params.name, InventoryMapUrl: params.url, Title: params.caption });
 
             break;
     }

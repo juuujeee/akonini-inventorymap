@@ -175,6 +175,8 @@
     justify-content: center;
     background: #FFF;
     border: 1px solid #e7e7e7;
+    flex-direction: column;
+    position: relative;
 }
 
 .svg-upload-btn {
@@ -266,4 +268,57 @@
     padding: 10px;
     outline: none;
     margin-bottom: 10px;
+}
+
+
+.projectLotStatusLegend
+{
+    width: auto;
+    /*padding: 15px;*/
+    position: absolute;
+    top: 50px;
+    right: 10px;
+}
+
+.projectLotStatusLegend h3 {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+.projectLotStatusLegendContainer {
+    display: flex;
+    flex-direction: column;
+    /*gap: 5px;*/
+}
+
+.projectlotStatusLegend-group {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-column-gap: 10px;
+    /*margin-bottom: 5px;*/
+}
+
+.projectlotStatusLegend-group small {
+    display: flex;
+    align-items: center;
+    font-size: 11px;
+}
+
+.projectlotStatusLegend-group input[type='color'] {
+    width: 30px;
+    height: 20px;
+    border: none;
+}
+
+.inventorymap-title {
+    position: absolute;
+    font-size: 18px;
+    font-weight: 600;
+    top: 10px;
+    width: 100%;
+    text-align: center;
+}
+
+.projectlotStatusLegend-group input[type='color']::-webkit-color-swatch-wrapper {
+    padding: 2px;
 }

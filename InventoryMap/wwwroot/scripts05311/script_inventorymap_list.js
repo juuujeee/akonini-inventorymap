@@ -49,6 +49,7 @@ export default function inventoryMapList(projectObj) {
                 viewClone.setAttribute('data-id', projectID);
                 viewClone.setAttribute('data-name', projectName);
                 viewClone.setAttribute('data-url', item.ImageFileUrl);
+                viewClone.setAttribute('data-caption', item.ImageCaption);
 
                 viewClone.querySelector('.jsProjectName').textContent = item.ImageCaption;
 

@@ -6,6 +6,7 @@ export default function inventoryMapDetail(projectObj) {
     let projectID = projectObj.ProjectID;
     let projectName = projectObj.ProjectName;
     let inventoryMapUrl = projectObj.InventoryMapUrl;
+    let title = projectObj.Title;
 
     let projectLotStatusLL = null;
 
@@ -31,6 +32,8 @@ export default function inventoryMapDetail(projectObj) {
 
         contentWrapper.appendChild(doc);
 
+
+        doc.querySelector('.jsSvgFileContainer').appendChild(generateProjectLotStatusLegend());
     }
 
     function handleBackButtonClick() {
@@ -40,7 +43,9 @@ export default function inventoryMapDetail(projectObj) {
     async function displayProjectInventoryMap() {
 
         let view = `
-                    <div class="svgFileUploadContainer jsSvgFileContainer" style="height: calc(100vh - 224px)">
+                    <div class="svgFileUploadContainer jsSvgFileContainer" style="height: calc(100vh - 244px)">
+                        
+                        <h4 class="inventorymap-title">${title}</h4>
                         
                     </div>
                 `;
@@ -49,7 +54,6 @@ export default function inventoryMapDetail(projectObj) {
         let doc = new DOMParser().parseFromString(view, 'text/html').querySelector('.jsSvgFileContainer');
 
         let svgEl;
-
 
         await fetch(inventoryMapUrl)
             .then(response => response.text())
@@ -70,7 +74,8 @@ export default function inventoryMapDetail(projectObj) {
 
             let lotDetailObj = projectLotRecords.find(e => e.LotID == lotID);
 
-           // console.log(lotDetailObj);
+            // console.log(lotDetailObj);
+            item.setAttribute('data-projectlotstatusid', lotDetailObj.ProjectLotStatusID);
 
             if (item.nextElementSibling) {
                 item.nextElementSibling.textContent = lotDetailObj.LotName;
@@ -105,6 +110,75 @@ export default function inventoryMapDetail(projectObj) {
         });
 
         return doc;
+    }
+
+    function generateProjectLotStatusLegend() {
+
+        let view = `
+            
+            <div class="projectLotStatusLegend jsProjectLotStatusLegend">
+                <h3>Legend</h3>
+
+                <div class="projectLotStatusLegendContainer">
+                    <div class="projectlotStatusLegend-group">
+                        <input type="color" class="jsProjectLotStatusLegendInput" value="#3F3F3F"/>
+                        <small>Available</small>
+                    </div>
+                    <div class="projectlotStatusLegend-group">
+                        <input type="color" value="#FFB606"/>
+                        <small>Reserved</small>
+                    </div>
+                    <div class="projectlotStatusLegend-group">
+                        <input type="color" value="#c71e1e"/>
+                        <small>Sold</small>
+                    </div>
+                    <div class="projectlotStatusLegend-group">
+                        <input type="color" value="#09b52e"/>
+                        <small>Future Expansion</small>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        let doc = new DOMParser().parseFromString(view, 'text/html').querySelector('.jsProjectLotStatusLegend');
+
+        doc.querySelector('.jsProjectLotStatusLegendInput').addEventListener('input', function (e) {
+
+            let val = e.target.value;
+
+            if (val) {
+                changeProjectLotStatusColor(1, val)
+            }
+        });
+
+        return doc;
+    }
+
+    function projectLotStatusLegendItem(data) {
+
+        let view = `
+            <div class="projectlotStatusLegend-group jsProjectLotStatusLegendItem" data-id="${data.ProjectLotStatusID}">
+                <input type="color" value="#3F3F3F"/>
+                <small>${data.ProjectLotStatusName}</small>
+            </div>
+        `;
+
+        let doc = new DOMParser().parseFromString(view, 'text/html').querySelector('.jsProjectLotStatusLegendItem');
+
+        return doc;
+    }
+
+    function changeProjectLotStatusColor(projectlotStatusID, color) {
+
+        document.querySelectorAll('[data-lotid]').forEach((item) => {
+
+            if (item.getAttribute('data-projectlotstatusid') == projectlotStatusID) {
+
+                item.setAttribute('style', `fill: ${color}`);
+               
+            }
+
+        });
     }
 
     function showLotDetail(data) {
