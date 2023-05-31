@@ -322,3 +322,8 @@
 .projectlotStatusLegend-group input[type='color']::-webkit-color-swatch-wrapper {
     padding: 2px;
 }
+
+.svgFileUploadContainer svg {
+    max-height: 100%;
+    max-width: 100%;
+}
