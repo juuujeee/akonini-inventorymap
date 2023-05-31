@@ -6,5 +6,6 @@ namespace BusinessRef.Model.InventoryMap
         public int LotID { get; set; }
         public int MasterProjectID { get; set; }
         public string LotName { get; set; }
+        public int MasterPersonID { get; set; }
     }
 }

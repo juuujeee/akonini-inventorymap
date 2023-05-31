@@ -90,6 +90,8 @@ namespace InventoryMap.Controllers
             {
                 if(ModelState.IsValid)
                 {
+                    model.MasterPersonID = Convert.ToInt32(HttpContext.Session.GetInt32("MasterPersonID"));
+
                     IGetProjectLotNameUpdateData dataLogic = new ProjectLotNameUpdateDataLogic(model);
 
                     return Json(dataLogic.GetProjectLotNameUpdateData());
@@ -133,6 +135,8 @@ namespace InventoryMap.Controllers
             {
                 if(ModelState.IsValid)
                 {
+                    model.MasterPersonID = Convert.ToInt32(HttpContext.Session.GetInt32("MasterPersonID"));
+
                     IGetProjectLotStatusUpdateData dataLogic = new ProjectLotStatusUpdateDataLogic(model);
 
                     return Json(dataLogic.GetProjectLotStatusUpdateData());

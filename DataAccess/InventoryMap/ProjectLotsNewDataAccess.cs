@@ -38,13 +38,14 @@ namespace DataAccess.InventoryMap
                 using (SqlCommand cmd = new SqlCommand())
                 {
                     cmd.Connection = con;
-                    cmd.CommandText = "[akonini.web.developer].spExtractProjectLotFromSVG";
+                    cmd.CommandText = "[akonini.web.developer].spExtractProjectLotFromSVGV2";
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     cmd.Parameters.Add(new SqlParameter { ParameterName = "@ProjectLotTVP", SqlDbType = SqlDbType.Structured, Value = CreateDataTable(_projectLot.ProjectLots), TypeName = "[akonini.web.project].ProjectLotType" });
                     cmd.Parameters.Add(new SqlParameter { ParameterName = "@MasterProjectID", SqlDbType = SqlDbType.Int, Value = _projectLot.MasterProjectID });
                     cmd.Parameters.Add(new SqlParameter { ParameterName = "@SVGFileName", SqlDbType = SqlDbType.NVarChar, Value = _projectLot.SVGFileName });
                     cmd.Parameters.Add(new SqlParameter { ParameterName = "@ImageCaption", SqlDbType = SqlDbType.NVarChar, Value = _projectLot.ImageCaption });
+                    cmd.Parameters.Add(new SqlParameter { ParameterName = "@MasterPersonID", SqlDbType = SqlDbType.Int, Value = _projectLot.MasterPersonID });
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {

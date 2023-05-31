@@ -38,12 +38,13 @@ namespace DataAccess.InventoryMap
                 using (SqlCommand cmd = new SqlCommand())
                 {
                     cmd.Connection = con;
-                    cmd.CommandText = "[akonini.web.developer].[spUpdateProjectLotStatus]";
+                    cmd.CommandText = "[akonini.web.developer].[spUpdateProjectLotStatusV2]";
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     cmd.Parameters.Add(new SqlParameter { ParameterName = "@LotID", SqlDbType = SqlDbType.Int, Value = _dataModel.LotID });
                     cmd.Parameters.Add(new SqlParameter { ParameterName = "@MasterProjectID", SqlDbType = SqlDbType.Int, Value = _dataModel.MasterProjectID });
                     cmd.Parameters.Add(new SqlParameter { ParameterName = "@ProjectLotStatusID", SqlDbType = SqlDbType.Int, Value = _dataModel.ProjectLotStatusID });
+                    cmd.Parameters.Add(new SqlParameter { ParameterName = "@MasterPersonID", SqlDbType = SqlDbType.Int, Value = _dataModel.MasterPersonID });
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
