@@ -11,15 +11,49 @@ export default function inventoryMapNew(projectObj) {
     let svgDoc = null;
     let file = null;
 
-    async function mainHtml() {
+    function mainHtml() {
 
-        contentWrapper.innerHTML = '';
+        contentWrapper.innerHTML = `
+            <div class="home-page-mainContainer jsInventoryMapContainer">
+                <div class="page-filter">
+                    <i class="jsBack back-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" style="height: 20px;"><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"></path></svg>
+                    </i>
+                    <h3 class="page-filter-title jsProjectTitle" style="text-transform: capitalize"></h3>
+                </div>
+                <div class="home-page-container">
 
-        let view = await globalFuncObj.fetchView(AppGlobal.baseUrl + `inventorymapupload`);
+                    <div class="home-page-projectList">
+                        <div class="projectList-header" style="grid-template-columns: 1fr">
+                            <div class="projectList-header-title">
+                                <h3>Upload Inventory Map</h3>
+                            </div>
+                        </div>
 
-        let doc = new DOMParser().parseFromString(view, 'text/html').querySelector('.jsInventoryMapContainer');
+                        <div class="projectlist-body">
+                            <div class="svgFileUploadContainer jsSvgFileContainer">
+                                <input type="file" class="SVGFileInput jsSVGFileInput" hidden accept=".svg"/>
+                                <img src="" class="SVGFilePreview jsSVGFilePreview"/>
+                                <small>Click to Open file</small>
+                            </div>
+                            <div class="projectinventorymap-form-group">
+                                <input type="text" name="ImageCaption" class="jsImageCaption" placeholder="Image Caption" required/>
+                            </div>
+                            <div class="UploadBtnContainer">
+                                <button class="svg-upload-btn jsUploadBtn">Upload</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-        contentWrapper.appendChild(doc);
+            </div>
+        `;
+
+        //let view = await globalFuncObj.fetchView(AppGlobal.baseUrl + `inventorymapupload`);
+
+        //let doc = new DOMParser().parseFromString(view, 'text/html').querySelector('.jsInventoryMapContainer');
+
+        //contentWrapper.appendChild(doc);
 
         let svgContainer = contentWrapper.querySelector('.jsSvgFileContainer');
 
@@ -226,7 +260,7 @@ export default function inventoryMapNew(projectObj) {
 
             globalFuncObj.loader.start();
 
-            await mainHtml();
+            mainHtml();
 
             globalFuncObj.loader.stop();
             

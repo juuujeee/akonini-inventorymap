@@ -59,6 +59,7 @@ namespace DataAccess.InventoryMap
                         {
                             returnDataModel.ProjectLotRecords = new List<ProjectLotRecordDataModel>();
                             returnDataModel.ProjectLotStatusLegend = new List<ProjectLotStatusLegendDataModel>();
+                            returnDataModel.ProjectLotStatus = new List<ProjectLotStatusRefDataModel>();
 
                             while(reader.Read())
                             {
@@ -88,6 +89,18 @@ namespace DataAccess.InventoryMap
                                         LegendColor = reader["LegendColor"].ToString()
                                     });
                                 }
+                            }
+
+
+                            reader.NextResult();
+
+                            while(reader.Read())
+                            {
+                                returnDataModel.ProjectLotStatus.Add(new ProjectLotStatusRefDataModel
+                                {
+                                    ID = Convert.ToInt32(reader["ID"]),
+                                    ProjectLotStatusName = reader["ProjectLotStatusName"].ToString()
+                                });
                             }
 
                         }

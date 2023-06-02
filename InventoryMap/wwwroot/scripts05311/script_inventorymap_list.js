@@ -8,15 +8,40 @@ export default function inventoryMapList(projectObj) {
 
     let inventoryMaps = [];
 
-    async function mainHtml() {
+    function mainHtml() {
 
-        contentWrapper.innerHTML = '';
+        contentWrapper.innerHTML = `
+            <div class="home-page-mainContainer jsInventoryMapContainer">
+                <div class="page-filter">
+                    <i class="jsBack back-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" style="height: 20px;"><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"></path></svg>
+                    </i>
+                    <h3 class="page-filter-title jsProjectTitle" style="text-transform: capitalize"></h3>
+                </div>
+                <div class="home-page-container">
 
-        let view = await globalFuncObj.fetchView(AppGlobal.baseUrl + `inventorymaplist`);
+                    <div class="home-page-projectList">
+                        <div class="projectList-header" style="grid-template-columns: 1fr">
+                            <div class="projectList-header-title" style="justify-content: space-between;">
+                                <h3>Inventory Map List</h3>
+                                <a href="${AppGlobal.baseUrl}inventorymap-upload" class="upload-svg-new data-link jsUploadNew">Upload</a>
+                            </div>
+                        </div>
 
-        let doc = new DOMParser().parseFromString(view, 'text/html').querySelector('.jsInventoryMapContainer');
+                        <div class="projectlist-body">
+               
+                        </div>
+                    </div>
+                </div>
 
-        contentWrapper.appendChild(doc);
+            </div>
+        `;
+
+        //let view = await globalFuncObj.fetchView(AppGlobal.baseUrl + `inventorymaplist`);
+
+        //let doc = new DOMParser().parseFromString(view, 'text/html').querySelector('.jsInventoryMapContainer');
+
+        //contentWrapper.appendChild(doc);
 
         contentWrapper.querySelector('.jsProjectTitle').textContent = projectName;
 
@@ -96,7 +121,7 @@ export default function inventoryMapList(projectObj) {
 
             inventoryMaps = InventoryMap;
             
-            await mainHtml();
+            mainHtml();
 
             globalFuncObj.loader.stop();
 

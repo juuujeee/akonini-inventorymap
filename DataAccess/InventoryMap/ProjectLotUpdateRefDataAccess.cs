@@ -74,21 +74,21 @@ namespace DataAccess.InventoryMap
                             }
 
 
-                            reader.NextResult();
+                            //reader.NextResult();
 
-                            while(reader.Read())
-                            {
-                                returnDataModel.StatusList.Add(new ProjectLotStatusRefDataModel()
-                                {
-                                    ID = Convert.ToInt32(reader["ID"]),
-                                    ProjectLotStatusName = reader["ProjectLotStatusName"].ToString()
-                                });
-                            }
+                            //while(reader.Read())
+                            //{
+                            //    returnDataModel.StatusList.Add(new ProjectLotStatusRefDataModel()
+                            //    {
+                            //        ID = Convert.ToInt32(reader["ID"]),
+                            //        ProjectLotStatusName = reader["ProjectLotStatusName"].ToString()
+                            //    });
+                            //}
 
-                            reader.NextResult();
-                            reader.Read();
+                            //reader.NextResult();
+                            //reader.Read();
 
-                            returnDataModel.StatusCodeNumber = Convert.ToInt32(reader["StatusCodeNumber"]);
+                            //returnDataModel.StatusCodeNumber = Convert.ToInt32(reader["StatusCodeNumber"]);
                         }
                     }
 

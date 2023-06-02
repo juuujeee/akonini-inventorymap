@@ -7,5 +7,6 @@ namespace BusinessRef.Model.InventoryMap
     {
         public ICollection<ProjectLotRecordDataModel> ProjectLotRecords { get; set; }
         public ICollection<ProjectLotStatusLegendDataModel> ProjectLotStatusLegend { get;set; }
+        public ICollection<ProjectLotStatusRefDataModel> ProjectLotStatus { get; set; }
     }
 }

@@ -64,6 +64,8 @@ namespace DataAccess.InventoryMap
                             
                             if(reader.HasRows)
                             {
+                                reader.Read();
+
                                 returnDataModel.StatusCodeNumber = Convert.ToInt32(reader["StatusCodeNumber"]);
                                 returnDataModel.ProjectLotStatusLegendID = Convert.ToInt32(reader["ProjectLotStatusLegendID"]);
                             }

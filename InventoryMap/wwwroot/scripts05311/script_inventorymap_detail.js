@@ -9,6 +9,7 @@ export default function inventoryMapDetail(projectObj) {
     let title = projectObj.Title;
 
     let projectLotStatusLL = null;
+    let projectLotStatus = [];
 
     let projectLotRecords = [];
 
@@ -21,13 +22,40 @@ export default function inventoryMapDetail(projectObj) {
 
     async function mainHtml() {
 
-        contentWrapper.innerHTML = '';
+        contentWrapper.innerHTML = `
+            <div class="home-page-mainContainer jsInventoryMapContainer">
+                <div class="page-filter">
+                    <i class="jsBack back-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" style="height: 20px;"><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"></path></svg>
+                    </i>
+                    <h3 class="page-filter-title jsProjectTitle" style="text-transform: capitalize"></h3>
+                </div>
+                <div class="home-page-container">
 
-        let view = await globalFuncObj.fetchView(AppGlobal.baseUrl + `inventorymaplist`);
+                    <div class="home-page-projectList">
+                        <div class="projectList-header" style="grid-template-columns: 1fr">
+                            <div class="projectList-header-title" style="justify-content: space-between;">
+                                <h3>Inventory Map Detail</h3>
+                                <a href="@String.Concat(baseUrl, "inventorymap-upload")" class="upload-svg-new data-link jsUploadNew">Upload</a>
+                            </div>
+                        </div>
 
-        let doc = new DOMParser().parseFromString(view, 'text/html').querySelector('.jsInventoryMapContainer');
+                        <div class="projectlist-body">
+               
+                        </div>
+                    </div>
+                </div>
 
-        contentWrapper.appendChild(doc);
+            </div>
+        `;
+
+        //let view = await globalFuncObj.fetchView(AppGlobal.baseUrl + `inventorymaplist`);
+
+        //let doc = new DOMParser().parseFromString(view, 'text/html').querySelector('.jsInventoryMapContainer');
+
+        //contentWrapper.appendChild(doc);
+
+        setProjectLotStatusLegend();
 
         contentWrapper.querySelector('.jsProjectTitle').textContent = projectName;
 
@@ -41,11 +69,16 @@ export default function inventoryMapDetail(projectObj) {
 
         contentWrapper.querySelector('.jsSvgFileContainer').prepend(generateProjectLotStatusLegend());
 
+    }
+
+    function setProjectLotStatusLegend() {
 
         if (projectLotStatusLegend.length > 0) {
+
             projectLotStatusLegend.forEach((item) => {
 
                 if (item.ProjectLotStatusID == 1) {
+
                     legendAvailableColor = item.LegendColor;
                 }
 
@@ -79,10 +112,11 @@ export default function inventoryMapDetail(projectObj) {
                     </div>
                 `;
 
-
         let doc = new DOMParser().parseFromString(view, 'text/html').querySelector('.jsSvgFileContainer');
 
         let svgEl;
+
+        globalFuncObj.loader.start();
 
         await fetch(inventoryMapUrl)
             .then(response => response.text())
@@ -146,16 +180,21 @@ export default function inventoryMapDetail(projectObj) {
 
             item.parentElement.addEventListener("click", async function () {
 
+                globalFuncObj.loader.start();
+
                 let data = await globalFuncObj.fetchDataGet(`${AppGlobal.baseUrl}inventory-map/projectlotupdateref/${lotID}/${projectID}`);
 
-                projectLotStatusLL = null;
-
-                projectLotStatusLL = globalFuncObj.loadDataList(data.StatusList, 'ID');
+                globalFuncObj.loader.stop();
 
                 showLotDetail(data.RecordData);
             });
 
         });
+
+
+        globalFuncObj.loader.stop();
+
+
 
         return doc;
     }
@@ -167,23 +206,7 @@ export default function inventoryMapDetail(projectObj) {
                 <div class="projectLotStatusLegend">
                     <h3>Legend</h3>
 
-                    <div class="projectLotStatusLegendContainer">
-                        <div class="projectlotStatusLegend-group">
-                            <input type="color" class="jsProjectLotStatusLegendInput" value="${legendAvailableColor}"/>
-                            <small>Available</small>
-                        </div>
-                        <div class="projectlotStatusLegend-group">
-                            <input type="color" value="${legendReservedColor}"/>
-                            <small>Reserved</small>
-                        </div>
-                        <div class="projectlotStatusLegend-group">
-                            <input type="color" value="${legendSoldColor}"/>
-                            <small>Sold</small>
-                        </div>
-                        <div class="projectlotStatusLegend-group">
-                            <input type="color" value="${legendFutureExpansionColor}"/>
-                            <small>Future Expansion</small>
-                        </div>
+                    <div class="projectLotStatusLegendContainer jsProjectLotStatusLegendContainer">
                     </div>
                 </div>
             </div>
@@ -191,14 +214,52 @@ export default function inventoryMapDetail(projectObj) {
 
         let doc = new DOMParser().parseFromString(view, 'text/html').querySelector('.jsProjectLotStatusLegend');
 
-        doc.querySelector('.jsProjectLotStatusLegendInput').addEventListener('input', function (e) {
 
-            let val = e.target.value;
+        if (projectLotStatus.length > 0) {
 
-            if (val) {
-                changeProjectLotStatusColor(1, val)
-            }
-        });
+            let tblContainer = doc.querySelector('.jsProjectLotStatusLegendContainer');
+            tblContainer.innerHTML = '';
+
+            projectLotStatus.forEach((item) => {
+
+                let el = projectLotStatusLegendItem(item);
+
+                let projectLotStatusLegendObj = projectLotStatusLegend.filter(x => x.ProjectLotStatusID == item.ID);
+
+                if (projectLotStatusLegendObj.length > 0) {
+                    el.setAttribute('data-id', projectLotStatusLegendObj[0].ID);
+                }
+
+                switch (parseInt(item.ID)) {
+                    case 1:
+
+                        el.querySelector('input').value = legendAvailableColor;
+
+                        break;
+
+
+                    case 2:
+                        el.querySelector('input').value = legendReservedColor;
+
+                        break;
+
+
+                    case 3:
+
+                        el.querySelector('input').value = legendSoldColor;
+                        break;
+
+
+                    case 4:
+                        el.querySelector('input').value = legendFutureExpansionColor;
+
+                        break;
+                }
+
+                tblContainer.appendChild(el);
+            });
+
+        }
 
         return doc;
     }
@@ -206,15 +267,67 @@ export default function inventoryMapDetail(projectObj) {
     function projectLotStatusLegendItem(data) {
 
         let view = `
-            <div class="projectlotStatusLegend-group jsProjectLotStatusLegendItem" data-id="${data.ProjectLotStatusID}">
-                <input type="color" value="#3F3F3F"/>
+            <div class="projectlotStatusLegend-group jsProjectLotStatusLegendItem" data-projectlotstatusid="${data.ID}">
+                <input type="color" class="projectLotStatusLegendInput" value=""/>
                 <small>${data.ProjectLotStatusName}</small>
             </div>
         `;
 
         let doc = new DOMParser().parseFromString(view, 'text/html').querySelector('.jsProjectLotStatusLegendItem');
 
+        doc.querySelector('input').addEventListener('input', function (e) {
+
+            let val = e.target.value;
+
+            if (val) {
+
+                changeProjectLotStatusColor(data.ID, val);
+            }
+
+        });
+
+        doc.querySelector('input').addEventListener('change', updateProjectLotStatusLegend);
+
         return doc;
+    }
+
+    async function updateProjectLotStatusLegend(e) {
+
+        let parentEl = e.target.closest('div');
+
+        let val = e.target.value;
+        
+        if (val) {
+
+            let formData = new FormData();
+            formData.append('ID', parentEl.getAttribute('data-id') || 0);
+            formData.append('ProjectLotStatusID', parentEl.getAttribute('data-projectlotstatusid'));
+            formData.append('LegendColor', val);
+            formData.append('MasterProjectID', projectID);
+
+            globalFuncObj.loader.start();
+
+            let data = await globalFuncObj.fetchDataPost(AppGlobal.baseUrl + 'inventory-map/projectlotstatuslegendupdate', formData);
+
+            if (data.HasError) {
+                throw alert.databaseError;
+            }
+
+            else {
+                if (data.StatusCodeNumber == 1) {
+                    globalFuncObj.isConfirmedAlertOk(alertType.successAlert, 'Updated successfully.');
+
+                    parentEl.setAttribute('data-id', data.ProjectLotStatusLegendID);
+                }
+
+                else {
+                    globalFuncObj.isConfirmedAlertOk(alertType.errorAlert, data.ErrorMessage);
+                }
+            }
+
+            globalFuncObj.loader.stop();
+        }
+
     }
 
     function changeProjectLotStatusColor(projectlotStatusID, color) {
@@ -514,14 +627,19 @@ export default function inventoryMapDetail(projectObj) {
 
             globalFuncObj.loader.start();
 
-            let { ProjectLotRecords, ProjectLotStatusLegend } = await globalFuncObj.fetchDataGet(`${AppGlobal.baseUrl}inventory-map/getprojectlots/?masterProjectID=${projectID}`);
+            let { ProjectLotRecords, ProjectLotStatusLegend, ProjectLotStatus } = await globalFuncObj.fetchDataGet(`${AppGlobal.baseUrl}inventory-map/getprojectlots/?masterProjectID=${projectID}`);
 
             projectLotRecords = ProjectLotRecords;
             projectLotStatusLegend = ProjectLotStatusLegend;
+            projectLotStatus = ProjectLotStatus;
 
-            await mainHtml();
+            projectLotStatusLL = globalFuncObj.loadDataList(projectLotStatus, 'ID');
+
+            mainHtml();
 
             globalFuncObj.loader.stop();
+
+            //console.log(projectLotStatusLegend);
 
         }
     }
