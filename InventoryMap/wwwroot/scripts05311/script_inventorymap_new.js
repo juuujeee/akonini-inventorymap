@@ -19,11 +19,13 @@ export default function inventoryMapNew(projectObj) {
 
         let doc = new DOMParser().parseFromString(view, 'text/html').querySelector('.jsInventoryMapContainer');
 
-        let svgContainer = doc.querySelector('.jsSvgFileContainer');
+        contentWrapper.appendChild(doc);
 
-        let svgFileInput = doc.querySelector('.jsSVGFileInput');
+        let svgContainer = contentWrapper.querySelector('.jsSvgFileContainer');
 
-        let uploadBtn = doc.querySelector('.jsUploadBtn');
+        let svgFileInput = contentWrapper.querySelector('.jsSVGFileInput');
+
+        let uploadBtn = contentWrapper.querySelector('.jsUploadBtn');
 
         svgContainer.addEventListener('click', handleClickSVGUploadContainer);
 
@@ -31,11 +33,9 @@ export default function inventoryMapNew(projectObj) {
 
         uploadBtn.addEventListener('click', handleClickUploadBtn);
 
-        doc.querySelector('.jsProjectTitle').textContent = projectName;
+        contentWrapper.querySelector('.jsProjectTitle').textContent = projectName;
 
-        doc.querySelector('.jsBack').addEventListener('click', handleBackButtonClick);
-
-        contentWrapper.appendChild(doc);
+        contentWrapper.querySelector('.jsBack').addEventListener('click', handleBackButtonClick);
 
     }
 
@@ -71,11 +71,16 @@ export default function inventoryMapNew(projectObj) {
             }
         }
 
+
+        globalFuncObj.loader.stop();
+
     }
 
     async function saveToDatabase(formData) {
 
         if (validateForm()) {
+
+            globalFuncObj.loader.start();
 
             let imageCaption = document.querySelector('.jsImageCaption');
 
@@ -83,8 +88,7 @@ export default function inventoryMapNew(projectObj) {
 
             let data = await globalFuncObj.fetchDataPost(AppGlobal.baseUrl + 'inventory-map/new', formData);
 
-            console.log(data);
-
+            //console.log(data);
 
             if (data.HasError) {
                 throw alertMessages.databaseError
@@ -102,6 +106,7 @@ export default function inventoryMapNew(projectObj) {
             }
 
             globalFuncObj.loader.stop();
+
         }
 
     }

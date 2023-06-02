@@ -52,6 +52,7 @@
     <Compile Include="Interfaces\Customs\IGetProjectListData.cs" />
     <Compile Include="Interfaces\Customs\IGetProjectLotNameUpdateData.cs" />
     <Compile Include="Interfaces\Customs\IGetProjectLotRecordData.cs" />
+    <Compile Include="Interfaces\Customs\IGetProjectLotStatusLegendUpdateData.cs" />
     <Compile Include="Interfaces\Customs\IGetProjectLotStatusUpdateData.cs" />
     <Compile Include="Interfaces\Customs\IGetProjectLotUpdateRefData.cs" />
     <Compile Include="Interfaces\Customs\IGetUserLoginData.cs" />
@@ -72,11 +73,14 @@
     <Compile Include="Model\InventoryMap\ProjectLotRecordDataModel.cs" />
     <Compile Include="Model\InventoryMap\ProjectLotRecordParamDataModel.cs" />
     <Compile Include="Model\InventoryMap\ProjectLotRecordReturnDataModel.cs" />
+    <Compile Include="Model\InventoryMap\ProjectLotStatusLegendDataModel.cs" />
     <Compile Include="Model\InventoryMap\ProjectLotStatusRefDataModel.cs" />
     <Compile Include="Model\InventoryMap\ProjectLotStatusUpdateParamDataModel.cs" />
     <Compile Include="Model\InventoryMap\ProjectLotStatusUpdateReturnDataModel.cs" />
     <Compile Include="Model\InventoryMap\ProjectLotUpdateRefParamDataModel.cs" />
     <Compile Include="Model\InventoryMap\ProjectLotUpdateRefReturnDataModel.cs" />
+    <Compile Include="Model\InventoryMap\ProjectLotStatusLegendUpdateParamDataModel.cs" />
+    <Compile Include="Model\InventoryMap\ProjectLotStatusLegendUpdateReturnDataModel.cs" />
     <Compile Include="Model\Project\ProjectListParamDataModel.cs" />
     <Compile Include="Model\Project\ProjectListRefDataModel.cs" />
     <Compile Include="Model\Project\ProjectListReturnDataModel.cs" />

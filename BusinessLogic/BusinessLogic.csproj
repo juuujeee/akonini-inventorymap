@@ -45,6 +45,7 @@
     <Compile Include="InventoryMap\ProjectLotNameUpdateDataLogic.cs" />
     <Compile Include="InventoryMap\ProjectLotRecordDataLogic.cs" />
     <Compile Include="InventoryMap\ProjectLotsNewDataLogic.cs" />
+    <Compile Include="InventoryMap\ProjectLotStatusLegendUpdateDataLogic.cs" />
     <Compile Include="InventoryMap\ProjectLotStatusUpdateDataLogic.cs" />
     <Compile Include="InventoryMap\ProjectLotUpdateRefDataLogic.cs" />
     <Compile Include="Project\ProjectListDataLogic.cs" />

@@ -16,17 +16,16 @@ export default function inventoryMapList(projectObj) {
 
         let doc = new DOMParser().parseFromString(view, 'text/html').querySelector('.jsInventoryMapContainer');
 
-        doc.querySelector('.jsProjectTitle').textContent = projectName;
-
-        //doc.querySelector('.projectlist-body').appendChild(await displayProjectInventoryMap());
-
-        doc.querySelector('.jsBack').addEventListener('click', handleBackButtonClick);
-
-        doc.querySelector('.jsUploadNew').setAttribute('data-id', projectID);
-
-        doc.querySelector('.jsUploadNew').setAttribute('data-name', projectName);
-
         contentWrapper.appendChild(doc);
+
+        contentWrapper.querySelector('.jsProjectTitle').textContent = projectName;
+
+        contentWrapper.querySelector('.jsBack').addEventListener('click', handleBackButtonClick);
+
+        contentWrapper.querySelector('.jsUploadNew').setAttribute('data-id', projectID);
+
+        contentWrapper.querySelector('.jsUploadNew').setAttribute('data-name', projectName);
+
 
         displayRecord();
 

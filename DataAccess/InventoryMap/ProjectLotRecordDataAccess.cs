@@ -38,7 +38,7 @@ namespace DataAccess.InventoryMap
                 using (SqlCommand cmd = new SqlCommand())
                 {
                     cmd.Connection = con;
-                    cmd.CommandText = "[akonini.web.developer].[spGetProjectLots]";
+                    cmd.CommandText = "[akonini.web.developer].[spGetProjectLotsV2]";
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     cmd.Parameters.Add(new SqlParameter { ParameterName = "@MasterProjectID", SqlDbType = SqlDbType.Int, Value = _dataModel.MasterProjectID });
@@ -58,6 +58,7 @@ namespace DataAccess.InventoryMap
                         else
                         {
                             returnDataModel.ProjectLotRecords = new List<ProjectLotRecordDataModel>();
+                            returnDataModel.ProjectLotStatusLegend = new List<ProjectLotStatusLegendDataModel>();
 
                             while(reader.Read())
                             {
@@ -67,8 +68,26 @@ namespace DataAccess.InventoryMap
                                     LotID = Convert.ToInt32(reader["LotID"]),
                                     ProjectLotStatusID = Convert.ToInt32(reader["ProjectLotStatusID"]),
                                     ProjectLotStatusName = reader["ProjectLotStatusName"].ToString(),
-                                    LotName = reader["LotName"].ToString()
+                                    LotName = reader["LotName"].ToString(),
+                                    LegendColor = reader["LegendColor"].ToString()
                                 });
+                            }
+
+                            reader.NextResult();
+
+                            if(reader.HasRows)
+                            {
+
+                                while (reader.Read())
+                                {
+                                    returnDataModel.ProjectLotStatusLegend.Add(new ProjectLotStatusLegendDataModel
+                                    {
+                                        ID = Convert.ToInt32(reader["ID"]),
+                                        MasterProjectID = Convert.ToInt32(reader["MasterProjectID"]),
+                                        ProjectLotStatusID = Convert.ToInt32(reader["ProjectLotStatusID"]),
+                                        LegendColor = reader["LegendColor"].ToString()
+                                    });
+                                }
                             }
 
                         }

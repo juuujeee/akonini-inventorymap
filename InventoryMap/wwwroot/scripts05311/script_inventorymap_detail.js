@@ -12,6 +12,13 @@ export default function inventoryMapDetail(projectObj) {
 
     let projectLotRecords = [];
 
+    let projectLotStatusLegend = [];
+
+    let legendAvailableColor = "#3F3F3F";
+    let legendReservedColor = "#FFB606";
+    let legendSoldColor = "#c71e1e";
+    let legendFutureExpansionColor = "#09b52e";
+
     async function mainHtml() {
 
         contentWrapper.innerHTML = '';
@@ -20,20 +27,42 @@ export default function inventoryMapDetail(projectObj) {
 
         let doc = new DOMParser().parseFromString(view, 'text/html').querySelector('.jsInventoryMapContainer');
 
-        doc.querySelector('.jsProjectTitle').textContent = projectName;
-
-        doc.querySelector('.projectlist-body').appendChild(await displayProjectInventoryMap());
-
-        doc.querySelector('.jsBack').addEventListener('click', handleBackButtonClick);
-
-        doc.querySelector('.projectList-header-title h3').textContent = 'Inventory Map Detail';
-
-        doc.querySelector('.jsUploadNew').remove();
-
         contentWrapper.appendChild(doc);
 
+        contentWrapper.querySelector('.jsProjectTitle').textContent = projectName;
 
-        doc.querySelector('.jsSvgFileContainer').appendChild(generateProjectLotStatusLegend());
+        contentWrapper.querySelector('.projectlist-body').appendChild(await displayProjectInventoryMap());
+
+        contentWrapper.querySelector('.jsBack').addEventListener('click', handleBackButtonClick);
+
+        contentWrapper.querySelector('.projectList-header-title h3').textContent = 'Inventory Map Detail';
+
+        contentWrapper.querySelector('.jsUploadNew').remove();
+
+        contentWrapper.querySelector('.jsSvgFileContainer').prepend(generateProjectLotStatusLegend());
+
+
+        if (projectLotStatusLegend.length > 0) {
+            projectLotStatusLegend.forEach((item) => {
+
+                if (item.ProjectLotStatusID == 1) {
+                    legendAvailableColor = item.LegendColor;
+                }
+
+                else if (item.ProjectLotStatusID = 2) {
+                    legendReservedColor = item.LegendColor;
+                }
+
+                else if (item.ProjectLotStatusID == 3) {
+                    legendSoldColor = item.LegendColor;
+                }
+
+                else if (item.ProjectLotStatusID == 4) {
+                    legendFutureExpansionColor = item.LegendColor;
+                }
+
+            });
+        }
     }
 
     function handleBackButtonClick() {
@@ -81,20 +110,39 @@ export default function inventoryMapDetail(projectObj) {
                 item.nextElementSibling.textContent = lotDetailObj.LotName;
             }
 
-            if (lotDetailObj.ProjectLotStatusID == 2) {
-                //reserved
-                item.setAttribute('style', 'fill: #FFB606');
+            let legendColor;
+
+            switch (parseInt(lotDetailObj.ProjectLotStatusID)) {
+
+                case 1:
+                    //available
+                    legendColor = legendAvailableColor;
+                    break;
+
+
+                case 2:
+                    //reserved
+                    legendColor = legendReservedColor;
+
+                    break;
+
+
+                case 3:
+                    //sold
+                    legendColor = legendSoldColor;
+
+                    break;
+
+
+                case 4:
+                    //future expansion
+                    legendColor = legendFutureExpansionColor;
+
+                    break;
             }
 
-            else if (lotDetailObj.ProjectLotStatusID == 3) {
-                item.setAttribute('style', 'fill: red');
+            item.setAttribute('style', `fill: ${legendColor}`);
 
-            }
-
-            else if (lotDetailObj.ProjectLotStatusID == 4) {
-                item.setAttribute('style', 'fill: green');
-
-            }
 
             item.parentElement.addEventListener("click", async function () {
 
@@ -115,26 +163,27 @@ export default function inventoryMapDetail(projectObj) {
     function generateProjectLotStatusLegend() {
 
         let view = `
-            
-            <div class="projectLotStatusLegend jsProjectLotStatusLegend">
-                <h3>Legend</h3>
+            <div class="projectLotStatusLegend-wrapper jsProjectLotStatusLegend">
+                <div class="projectLotStatusLegend">
+                    <h3>Legend</h3>
 
-                <div class="projectLotStatusLegendContainer">
-                    <div class="projectlotStatusLegend-group">
-                        <input type="color" class="jsProjectLotStatusLegendInput" value="#3F3F3F"/>
-                        <small>Available</small>
-                    </div>
-                    <div class="projectlotStatusLegend-group">
-                        <input type="color" value="#FFB606"/>
-                        <small>Reserved</small>
-                    </div>
-                    <div class="projectlotStatusLegend-group">
-                        <input type="color" value="#c71e1e"/>
-                        <small>Sold</small>
-                    </div>
-                    <div class="projectlotStatusLegend-group">
-                        <input type="color" value="#09b52e"/>
-                        <small>Future Expansion</small>
+                    <div class="projectLotStatusLegendContainer">
+                        <div class="projectlotStatusLegend-group">
+                            <input type="color" class="jsProjectLotStatusLegendInput" value="${legendAvailableColor}"/>
+                            <small>Available</small>
+                        </div>
+                        <div class="projectlotStatusLegend-group">
+                            <input type="color" value="${legendReservedColor}"/>
+                            <small>Reserved</small>
+                        </div>
+                        <div class="projectlotStatusLegend-group">
+                            <input type="color" value="${legendSoldColor}"/>
+                            <small>Sold</small>
+                        </div>
+                        <div class="projectlotStatusLegend-group">
+                            <input type="color" value="${legendFutureExpansionColor}"/>
+                            <small>Future Expansion</small>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -404,14 +453,14 @@ export default function inventoryMapDetail(projectObj) {
                     let statusColorCoding = '';
 
                     if (projectLotStatusID == 2) {
-                        statusColorCoding = '#FFB606';
+                        statusColorCoding = legendReservedColor;
                     }
                     else if (projectLotStatusID == 3) {
-                        statusColorCoding = 'red';
+                        statusColorCoding = legendSoldColor;
                     }
 
                     else if (projectLotStatusID == 4) {
-                        statusColorCoding = 'green';
+                        statusColorCoding = legendFutureExpansionColor;
                     }
 
                     for (var i = 0; i < document.querySelectorAll('[data-lotid]').length; i++) {
@@ -465,9 +514,10 @@ export default function inventoryMapDetail(projectObj) {
 
             globalFuncObj.loader.start();
 
-            let { ProjectLotRecords } = await globalFuncObj.fetchDataGet(`${AppGlobal.baseUrl}inventory-map/getprojectlots/?masterProjectID=${projectID}`);
+            let { ProjectLotRecords, ProjectLotStatusLegend } = await globalFuncObj.fetchDataGet(`${AppGlobal.baseUrl}inventory-map/getprojectlots/?masterProjectID=${projectID}`);
 
             projectLotRecords = ProjectLotRecords;
+            projectLotStatusLegend = ProjectLotStatusLegend;
 
             await mainHtml();
 

@@ -6,13 +6,11 @@ using System.Threading.Tasks;
 
 namespace BusinessRef.Model.InventoryMap
 {
-    public class ProjectLotRecordDataModel
+    public class ProjectLotStatusLegendDataModel
     {
-        public int ProjectLotID { get; set; }
-        public int LotID { get; set; }
+        public int ID { get; set; }
+        public int MasterProjectID { get; set; }
         public int ProjectLotStatusID { get; set; }
-        public string ProjectLotStatusName { get; set; }
-        public string LotName { get; set; }
         public string LegendColor { get; set; }
     }
 }

@@ -196,5 +196,49 @@ namespace InventoryMap.Controllers
 
             return Json(dataLogic.GetProjectLotRecordData());
         }
+
+
+
+        [Route("inventory-map/projectlotstatuslegendupdate")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult ProjectLotStatusLegendUpdate(ProjectLotStatusLegendUpdateParamDataModel model)
+        {
+            try
+            {
+                model.MasterPersonID = Convert.ToInt32(HttpContext.Session.GetInt32("MasterPersonID"));
+
+                if(ModelState.IsValid)
+                {
+                    IGetProjectLotStatusLegendUpdateData dataLogic = new ProjectLotStatusLegendUpdateDataLogic(model);
+
+                    return Json(dataLogic.GetProjectLotStatusLegendUpdateData());
+                }
+                else
+                {
+                    var modelErrors = new Dictionary<string, string>();
+
+                    foreach (var modelStatekey in ModelState.Keys)
+                    {
+                        var value = ModelState[modelStatekey];
+
+                        if (value is not null)
+                        {
+                            foreach (var modelError in value.Errors)
+                            {
+                                modelErrors.Add(modelStatekey, modelError.ErrorMessage);
+                            }
+                        }
+
+                    }
+                    return Json(new { StatusCodeNumber = -1, responseText = modelErrors });
+                }
+            }
+            catch(Exception ex)
+            {
+                return Json(new { StatusCodeNumber = 0, ErrorMessage = ex.Message });
+
+            }
+        }
     }
 }
