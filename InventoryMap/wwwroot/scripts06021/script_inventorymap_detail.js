@@ -82,7 +82,7 @@ export default function inventoryMapDetail(projectObj) {
                     legendAvailableColor = item.LegendColor;
                 }
 
-                else if (item.ProjectLotStatusID = 2) {
+                else if (item.ProjectLotStatusID == 2) {
                     legendReservedColor = item.LegendColor;
                 }
 
