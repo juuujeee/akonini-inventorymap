@@ -307,12 +307,13 @@
 }
 
 .inventorymap-title {
-    position: absolute;
+    /*position: absolute;*/
     font-size: 18px;
     font-weight: 600;
-    top: 10px;
+    /*top: 10px;*/
     width: 100%;
     text-align: center;
+    margin-top: 10px;
 }
 
 .projectlotStatusLegend-group input[type='color']::-webkit-color-swatch-wrapper {

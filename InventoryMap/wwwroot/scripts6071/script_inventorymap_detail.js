@@ -67,7 +67,9 @@ export default function inventoryMapDetail(projectObj) {
 
         contentWrapper.querySelector('.jsUploadNew').remove();
 
-        contentWrapper.querySelector('.jsSvgFileContainer').prepend(generateProjectLotStatusLegend());
+        //contentWrapper.querySelector('.jsSvgFileContainer').prepend(generateProjectLotStatusLegend());
+
+        contentWrapper.querySelector('.jsSvgFileContainer').insertBefore(generateProjectLotStatusLegend(), contentWrapper.querySelector('.jsSvgFileContainer').children[1]);
 
     }
 
@@ -105,7 +107,7 @@ export default function inventoryMapDetail(projectObj) {
     async function displayProjectInventoryMap() {
 
         let view = `
-                    <div class="svgFileUploadContainer jsSvgFileContainer" style="height: calc(100vh - 244px)">
+                    <div class="svgFileUploadContainer jsSvgFileContainer" style="height: auto; padding-bottom: 20px">
                         
                         <h4 class="inventorymap-title">${title}</h4>
                         
