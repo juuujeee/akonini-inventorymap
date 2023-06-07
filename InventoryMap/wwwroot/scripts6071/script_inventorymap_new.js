@@ -94,10 +94,23 @@ export default function inventoryMapNew(projectObj) {
                 formData.append('SVGFileName', uploadAzureFunc.FileName);
                 formData.append('MasterProjectID', projectID);
 
+                //let arr = [];
+
+                //let i = 0;
+
                 extractSVG().forEach((item, index) => {
 
-                    formData.append(`ProjectLots[${index}].MasterProjectID`, projectID);
-                    formData.append(`ProjectLots[${index}].LotID`, item);
+                    //if (index > 590) {
+
+
+                    //    i++;
+                    //}
+
+                    formData.append(`ProjectLots[${i}].LotID`, item);
+
+
+                    //formData.append(`ProjectLots[${index}].MasterProjectID`, projectID);
+
 
                 });
 
@@ -119,6 +132,8 @@ export default function inventoryMapNew(projectObj) {
             let imageCaption = document.querySelector('.jsImageCaption');
 
             formData.append('ImageCaption', imageCaption.value);
+
+            //formData.ImageCaption = imageCaption.value;
 
             let data = await globalFuncObj.fetchDataPost(AppGlobal.baseUrl + 'inventory-map/new', formData);
 

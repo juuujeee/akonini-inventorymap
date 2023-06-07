@@ -102,6 +102,48 @@ const globalFuncObj = {
         return retData;
     },
 
+    fetchDataPost2: async function (url, formData) {
+
+        //formData.append("__RequestVerificationToken", document.querySelector("input[name=__RequestVerificationToken").value);
+
+        formData.__RequestVerificationToken = document.querySelector("input[name=__RequestVerificationToken").value;
+
+        let retData;
+
+        let options = {
+            headers: {
+                "X-Requested-With": "XMLHttpRequest",
+                "Content-Type": "application/json"
+            },
+            method: 'POST',
+            body: JSON.stringify(formData)
+        }
+        await fetch(url, options).then(res => {
+            if (res.ok) {
+                return res.json()
+            }
+            else if (res.status == 440) {
+                //throw alertMessages.sessionExpired
+                window.location.href = AppGlobal.baseUrl;
+
+            }
+            else {
+                throw alertMessages.serverError
+            }
+        }).then(data => {
+
+            retData = data;
+
+        }).catch(error => {
+
+            console.log(error);
+
+            globalFuncObj.isConfirmedAlertOk(alertType.errorAlert, error);
+        })
+
+        return retData;
+    },
+
     fetchView: async function (url) {
         let retView;
 

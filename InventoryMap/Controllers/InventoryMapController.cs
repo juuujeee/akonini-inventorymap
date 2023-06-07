@@ -50,7 +50,9 @@ namespace InventoryMap.Controllers
 
                     IProjectLotsNewData projectLotsNew = new ProjectLotsNewDataLogic(projectLot);
 
-                    return Json(projectLotsNew.ProjectLotsNewData());
+                    var obj = projectLotsNew.ProjectLotsNewData();
+
+                    return Json(obj);
 
                 }
                 else
