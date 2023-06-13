@@ -86,7 +86,8 @@ namespace DataAccess.InventoryMap
                                         ID = Convert.ToInt32(reader["ID"]),
                                         MasterProjectID = Convert.ToInt32(reader["MasterProjectID"]),
                                         ProjectLotStatusID = Convert.ToInt32(reader["ProjectLotStatusID"]),
-                                        LegendColor = reader["LegendColor"].ToString()
+                                        LegendColor = reader["LegendColor"].ToString(),
+                                        ProjectLotStatusName = reader["ProjectLotStatusName"].ToString()
                                     });
                                 }
                             }

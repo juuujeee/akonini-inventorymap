@@ -12,5 +12,6 @@ namespace BusinessRef.Model.InventoryMap
         public int MasterProjectID { get; set; }
         public int ProjectLotStatusID { get; set; }
         public string LegendColor { get; set; }
+        public string ProjectLotStatusName { get; set; }
     }
 }

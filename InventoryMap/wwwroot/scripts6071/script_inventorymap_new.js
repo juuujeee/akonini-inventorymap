@@ -106,7 +106,7 @@ export default function inventoryMapNew(projectObj) {
                     //    i++;
                     //}
 
-                    formData.append(`ProjectLots[${i}].LotID`, item);
+                    formData.append(`ProjectLots[${index}].LotID`, item);
 
 
                     //formData.append(`ProjectLots[${index}].MasterProjectID`, projectID);
