@@ -96,23 +96,23 @@ export default function inventoryMapNew(projectObj) {
 
                 //let arr = [];
 
-                //let i = 0;
+                let i = 0;
 
-                extractSVG().forEach((item, index) => {
+                //extractSVG().forEach((item, index) => {
 
-                    //if (index > 590) {
+                //    if (index > 1800) {
 
+                //        formData.append(`ProjectLots[${i}].LotID`, item);
 
-                    //    i++;
-                    //}
-
-                    formData.append(`ProjectLots[${index}].LotID`, item);
-
-
-                    //formData.append(`ProjectLots[${index}].MasterProjectID`, projectID);
+                //        i++;
+                //    }
 
 
-                });
+
+                //    //formData.append(`ProjectLots[${index}].MasterProjectID`, projectID);
+
+
+                //});
 
                 saveToDatabase(formData);
             }
@@ -137,7 +137,7 @@ export default function inventoryMapNew(projectObj) {
 
             let data = await globalFuncObj.fetchDataPost(AppGlobal.baseUrl + 'inventory-map/new', formData);
 
-            //console.log(data);
+            console.log(data);
 
             if (data.HasError) {
                 throw alertMessages.databaseError

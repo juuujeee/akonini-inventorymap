@@ -106,15 +106,18 @@ export default function inventoryMapDetail(projectObj) {
 
             let lotDetailObj = projectLotRecords.find(e => e.LotID == lotID);
 
-            // console.log(lotDetailObj);
-            item.setAttribute('data-projectlotstatusid', lotDetailObj.ProjectLotStatusID);
+            if (lotDetailObj) {
 
-            if (item.nextElementSibling) {
-                item.nextElementSibling.textContent = lotDetailObj.LotName;
+                // console.log(lotDetailObj);
+                item.setAttribute('data-projectlotstatusid', lotDetailObj.ProjectLotStatusID);
+
+                if (item.nextElementSibling) {
+                    item.nextElementSibling.textContent = lotDetailObj.LotName;
+                }
+
+                item.setAttribute('style', `fill: ${lotDetailObj.LegendColor}`);
+
             }
-
-            item.setAttribute('style', `fill: ${lotDetailObj.LegendColor}`);
-
 
             item.parentElement.addEventListener("click", async function () {
 
