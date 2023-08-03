@@ -36,7 +36,7 @@ namespace DataAccess.User
                 using (SqlCommand cmd = new SqlCommand())
                 {
                     cmd.Connection = con;
-                    cmd.CommandText = "[akonini.web.developer].[spLoginUserPasswordV2]";
+                    cmd.CommandText = "[akonini.web.developer].[spLoginUserPassword_InventoryMap]";
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     cmd.Parameters.Add(new SqlParameter { ParameterName = "@UserName", SqlDbType = SqlDbType.NVarChar, Value = _dataModel.UserName });
